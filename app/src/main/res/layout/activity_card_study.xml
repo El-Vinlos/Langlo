@@ -1,0 +1,79 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/textCard_en"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="English Word"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textCard_vn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/textCard_vn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vietnamese Word"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:alpha="0"
+        app:layout_constraintTop_toBottomOf="@id/textCard_en"
+        app:layout_constraintBottom_toTopOf="@+id/buttonContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <!-- Container for buttons -->
+    <LinearLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hiện đáp án"
+            android:textColor="?attr/colorOnSecondary"
+            app:backgroundTint="?attr/colorSecondary"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/star"
+            app:iconGravity="start"
+            app:iconPadding="8dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPlayAudio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Nghe"
+            android:textColor="?attr/colorOnSecondary"
+            app:backgroundTint="?attr/colorSecondary"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/play"
+            app:iconGravity="start"
+            app:iconPadding="8dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

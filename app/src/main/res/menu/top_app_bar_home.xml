@@ -1,0 +1,11 @@
+<!-- res/menu/top_app_bar_menu.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_account"
+        android:icon="@drawable/user"
+        android:title="account"
+        app:showAsAction="always"
+        app:iconTint="?attr/colorOnPrimary" />
+</menu>

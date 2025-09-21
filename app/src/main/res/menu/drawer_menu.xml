@@ -1,0 +1,8 @@
+<!-- res/menu/drawer_menu.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_home" android:title="Thẻ bài tập" android:icon="@drawable/user" />
+        <item android:id="@+id/nav_decks" android:title="Xem thẻ" android:icon="@drawable/user" />
+        <item android:id="@+id/nav_settings" android:title="Cài đặt" android:icon="@drawable/user" />
+    </group>
+</menu>
