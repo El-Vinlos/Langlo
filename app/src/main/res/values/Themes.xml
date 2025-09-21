@@ -1,12 +1,41 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
-    <!-- Custom App Theme -->
-    <style name="LangloTheme" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize colors -->
+    <!-- App Theme -->
+    <style name="LangloDefaultTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">#03060D</item>
         <item name="colorOnPrimary">#D9D9D9</item>
         <item name="colorSecondary">#202328</item>
         <item name="colorOnSecondary">#D9D9D9</item>
+    </style>
+
+    <!-- Custom MaterialAlertDialog -->
+    <style name="CustomMaterialAlertDialog" parent="Theme.Material3.DayNight.Dialog.Alert">
+        <item name="materialAlertDialogTitleTextStyle">@style/CustomDialogTitle</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/CustomDialogBody</item>
+        <item name="buttonBarPositiveButtonStyle">@style/CustomDialogButtonPositive</item>
+        <item name="buttonBarNegativeButtonStyle">@style/CustomDialogButtonNegative</item>
+    </style>
+
+    <!-- Dialog Title -->
+    <style name="CustomDialogTitle" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textColor">?attr/colorOnSecondary</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!-- Dialog Body -->
+    <style name="CustomDialogBody" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textColor">?attr/colorOnSecondary</item>
+    </style>
+
+    <style name="CustomDialogButtonPositive" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:textColor">#D9D9D9</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!-- Negative Button -->
+    <style name="CustomDialogButtonNegative" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:textColor">#FF0000</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 
 </resources>

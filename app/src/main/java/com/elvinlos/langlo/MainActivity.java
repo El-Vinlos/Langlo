@@ -1,6 +1,5 @@
 package com.elvinlos.langlo;
 
-import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -14,6 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.elvinlos.langlo.utils.DrawerHandler;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -30,11 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private final List<Deck> deckList = new ArrayList<>();
 
     private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
     private MaterialToolbar topAppBar;
     private ActionBarDrawerToggle toggle;
-    private RecyclerView recyclerView;
-    private DeckAdapter deckAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         drawerLayout = findViewById(R.id.drawerLayout);
-        navigationView = findViewById(R.id.navigationView);
+        NavigationView navigationView = findViewById(R.id.navigationView);
         topAppBar = findViewById(R.id.topAppBar);
 
         setSupportActionBar(topAppBar);
@@ -63,19 +60,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
         navigationView.setNavigationItemSelectedListener(item -> {
-            handleDrawerItem(item);
-            drawerLayout.closeDrawer(GravityCompat.START);
+            DrawerHandler.handleDrawerItem(this, drawerLayout, topAppBar, item);
             return true;
         });
 
-        recyclerView = findViewById(R.id.recyclerViewDecks);
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewDecks);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         loadDecksFromAssets();
 
-        deckAdapter = new DeckAdapter(this, deckList);
+        DeckAdapter deckAdapter = new DeckAdapter(this, deckList);
         recyclerView.setAdapter(deckAdapter);
 
-        // --- OnBackPressedDispatcher setup ---
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -83,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     drawerLayout.closeDrawer(GravityCompat.START);
                 } else {
                     setEnabled(false);
-                    onBackPressed();
+                    finish();
                     setEnabled(true);
                 }
             }
@@ -100,24 +95,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onPrepareOptionsMenu(menu);
     }
 
-
-    private void handleDrawerItem(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.nav_home) {
-            topAppBar.setTitle(getString(R.string.app_name));
-            topAppBar.getMenu().clear();
-            topAppBar.inflateMenu(R.menu.top_app_bar_home);
-
-        } else if (id == R.id.nav_decks) {
-            Intent intent = new Intent(this, DeckActivity.class);
-            startActivity(intent);
-            finish();
-        } else if (id == R.id.nav_settings) {
-            topAppBar.setTitle("Settings");
-            topAppBar.getMenu().clear();
-        }
-    }
 
     private void loadDecksFromAssets() {
         try {

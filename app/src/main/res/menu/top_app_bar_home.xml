@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_account"
         android:icon="@drawable/user"
-        android:title="account"
+        android:title="@string/user"
         app:showAsAction="always"
         app:iconTint="?attr/colorOnPrimary" />
 </menu>

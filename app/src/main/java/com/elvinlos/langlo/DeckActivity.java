@@ -1,6 +1,5 @@
 package com.elvinlos.langlo;
 
-import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,11 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.elvinlos.langlo.utils.DrawerHandler;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -36,14 +35,12 @@ public class DeckActivity extends AppCompatActivity {
 
     private static final String TAG = "DeckActivity";
 
-    private DrawerLayout drawerLayoutDeck;
-    private NavigationView navigationViewDeck;
-    private MaterialToolbar topAppBarDeck;
+    private DrawerLayout drawerLayout;
+    private MaterialToolbar topAppBar;
     private ActionBarDrawerToggle toggle;
-    private RecyclerView recyclerViewCards;
     private CardAdapter cardAdapter;
 
-    private final List<Card> cardList = new ArrayList<>();
+    private final List<Card> allCards = new ArrayList<>();
     private final List<String> deckFolders = new ArrayList<>();
     private final List<String> deckTitles = new ArrayList<>();
 
@@ -52,46 +49,37 @@ public class DeckActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deck);
 
-        drawerLayoutDeck = findViewById(R.id.drawerLayoutDeck);
-        navigationViewDeck = findViewById(R.id.navigationViewDeck);
-        topAppBarDeck = findViewById(R.id.topAppBarDeck);
-        recyclerViewCards = findViewById(R.id.recyclerViewCards);
+        drawerLayout = findViewById(R.id.drawerLayoutDeck);
+        NavigationView navigationView = findViewById(R.id.navigationViewDeck);
+        topAppBar = findViewById(R.id.topAppBarDeck);
+        RecyclerView recyclerViewCards = findViewById(R.id.recyclerViewCards);
 
-        setSupportActionBar(topAppBarDeck);
+        setSupportActionBar(topAppBar);
 
         toggle = new ActionBarDrawerToggle(
                 this,
-                drawerLayoutDeck,
+                drawerLayout,
                 R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close
         );
-        drawerLayoutDeck.addDrawerListener(toggle);
+        drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        navigationViewDeck.setNavigationItemSelectedListener(item -> {
-            int id = item.getItemId();
-            if (id == R.id.nav_home) {
-                startActivity(new Intent(this, MainActivity.class));
-                finish();
-            } else if (id == R.id.nav_settings) {
-                topAppBarDeck.setTitle("Settings");
-                topAppBarDeck.getMenu().clear();
-            }
-            drawerLayoutDeck.closeDrawer(GravityCompat.START);
+        navigationView.setNavigationItemSelectedListener(item -> {
+            DrawerHandler.handleDrawerItem(this, drawerLayout, topAppBar, item);
             return true;
         });
 
         recyclerViewCards.setLayoutManager(new LinearLayoutManager(this));
-        cardAdapter = new CardAdapter(this, cardList);
+        cardAdapter = new CardAdapter();
         recyclerViewCards.setAdapter(cardAdapter);
 
         loadDeckFoldersAndTitles();
 
-        // Load first deck automatically if available
         if (!deckFolders.isEmpty()) {
             Log.d(TAG, "Loading first deck: " + deckFolders.get(0));
             loadCardsFromDeck(deckFolders.get(0));
@@ -131,58 +119,65 @@ public class DeckActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         getMenuInflater().inflate(R.menu.top_app_bar_deck, menu);
 
         MenuItem spinnerItem = menu.findItem(R.id.action_deck_spinner);
-        Spinner spinner = (Spinner) spinnerItem.getActionView();
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_spinner_dropdown_item, deckTitles);
-        spinner.setAdapter(adapter);
+        View spinnerView = spinnerItem.getActionView();
+        if (spinnerView instanceof Spinner) {
+            Spinner spinner = (Spinner) spinnerView;
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                    this, android.R.layout.simple_spinner_dropdown_item, deckTitles);
+            spinner.setAdapter(adapter);
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String folderName = deckFolders.get(position);
-                Log.d(TAG, "Spinner selected: " + folderName);
-                loadCardsFromDeck(folderName);
-            }
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(@NonNull AdapterView<?> parent, @NonNull View view, int position, long id) {
+                    String folderName = deckFolders.get(position);
+                    Log.d(TAG, "Spinner selected: " + folderName);
+                    loadCardsFromDeck(folderName);
+                }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
-        });
+                @Override
+                public void onNothingSelected(@NonNull AdapterView<?> parent) {
+                }
+            });
+        }
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
-        androidx.appcompat.widget.SearchView searchView = (androidx.appcompat.widget.SearchView) searchItem.getActionView();
-        searchView.setQueryHint("Search cards...");
+        View actionView = searchItem.getActionView();
+        if (actionView instanceof androidx.appcompat.widget.SearchView) {
+            androidx.appcompat.widget.SearchView searchView = (androidx.appcompat.widget.SearchView) actionView;
+            searchView.setQueryHint("Search cards...");
 
-        searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
-            @Override
-            public boolean onMenuItemActionExpand(MenuItem item) {
-                spinnerItem.setVisible(false);
-                return true;
-            }
+            searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+                @Override
+                public boolean onMenuItemActionExpand(@NonNull MenuItem item) {
+                    spinnerItem.setVisible(false);
+                    return true;
+                }
 
-            @Override
-            public boolean onMenuItemActionCollapse(MenuItem item) {
-                spinnerItem.setVisible(true);
-                return true;
-            }
-        });
+                @Override
+                public boolean onMenuItemActionCollapse(@NonNull MenuItem item) {
+                    spinnerItem.setVisible(true);
+                    return true;
+                }
+            });
 
-        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                cardAdapter.filter(query);
-                return true;
-            }
+            searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(@NonNull String query) {
+                    filterCards(query);
+                    return true;
+                }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                cardAdapter.filter(newText);
-                return true;
-            }
-        });
+                @Override
+                public boolean onQueryTextChange(@NonNull String newText) {
+                    filterCards(newText);
+                    return true;
+                }
+            });
+        }
 
         return true;
     }
@@ -206,21 +201,46 @@ public class DeckActivity extends AppCompatActivity {
             while ((line = reader.readLine()) != null) jsonBuilder.append(line);
 
             JSONObject root = new JSONObject(jsonBuilder.toString());
-            JSONArray jsonArray = root.getJSONArray("cards");
+            JSONArray jsonArray = root.optJSONArray("cards");
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject obj = jsonArray.getJSONObject(i);
-                String en = obj.optString("english");
-                String vi = obj.optString("vietnamese");
-                String audio = obj.optString("audioFile", null);
-                newCards.add(new Card(en, vi, audio));
+            if (jsonArray != null) {
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject obj = jsonArray.optJSONObject(i);
+                    if (obj == null) continue;
+
+                    String en = obj.optString("english", "");
+                    String vi = obj.optString("vietnamese", "");
+                    String audio = obj.optString("audioFile", "");
+
+                    if (!en.isEmpty() && !vi.isEmpty()) {
+                        newCards.add(new Card(String.valueOf(i), en, vi, audio));
+                    }
+                }
             }
 
-            Log.d(TAG, "Loaded " + newCards.size() + " cards from deck: " + deckName);
         } catch (Exception e) {
             Log.e(TAG, "Error loading cards from deck: " + deckName, e);
         }
 
-        cardAdapter.updateCards(newCards);
+        allCards.clear();
+        allCards.addAll(newCards);
+
+        cardAdapter.submitList(new ArrayList<>(allCards));
+    }
+
+    private void filterCards(@Nullable String query) {
+        if (query == null || query.trim().isEmpty()) {
+            cardAdapter.submitList(new ArrayList<>(allCards));
+        } else {
+            String lower = query.toLowerCase();
+            List<Card> filtered = new ArrayList<>();
+            for (Card c : allCards) {
+                if (c.getEnglish().toLowerCase().contains(lower) ||
+                        c.getVietnamese().toLowerCase().contains(lower)) {
+                    filtered.add(c);
+                }
+            }
+            cardAdapter.submitList(filtered);
+        }
     }
 }

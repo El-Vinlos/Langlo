@@ -1,30 +1,32 @@
 package com.elvinlos.langlo;
 
-import android.content.Context;
-import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+public class CardAdapter extends ListAdapter<Card, CardAdapter.CardViewHolder> {
 
-public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
+    private static final DiffUtil.ItemCallback<Card> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<>() {
+                @Override
+                public boolean areItemsTheSame(@NonNull Card oldItem, @NonNull Card newItem) {
+                    return oldItem.getId().equals(newItem.getId());
+                }
 
-    private final Context context;
-    private final List<Card> cardList;
-    private final List<Card> filteredList;
+                @Override
+                public boolean areContentsTheSame(@NonNull Card oldItem, @NonNull Card newItem) {
+                    return oldItem.equals(newItem);
+                }
+            };
 
-    public CardAdapter(Context context, List<Card> cardList) {
-        this.context = context;
-        this.cardList = cardList;
-        this.filteredList = new ArrayList<>(cardList);
+    public CardAdapter() {
+        super(DIFF_CALLBACK);
     }
 
     @NonNull
@@ -37,51 +39,18 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
-        Card card = filteredList.get(position);
-
+        Card card = getItem(position);
         holder.textEnglish.setText(card.getEnglish());
         holder.textVietnamese.setText(card.getVietnamese());
-
     }
 
-    @Override
-    public int getItemCount() {
-        return filteredList.size();
-    }
+    public static class CardViewHolder extends RecyclerView.ViewHolder {
+        final TextView textEnglish, textVietnamese;
 
-    static class CardViewHolder extends RecyclerView.ViewHolder {
-        TextView textEnglish, textVietnamese;
-
-        public CardViewHolder(@NonNull View itemView) {
+        CardViewHolder(@NonNull View itemView) {
             super(itemView);
             textEnglish = itemView.findViewById(R.id.textEnglish);
             textVietnamese = itemView.findViewById(R.id.textVietnamese);
         }
     }
-
-    public void filter(String query) {
-        filteredList.clear();
-        if (query == null || query.trim().isEmpty()) {
-            filteredList.addAll(cardList);
-        } else {
-            String lower = query.toLowerCase();
-            for (Card c : cardList) {
-                if (c.getEnglish().toLowerCase().contains(lower) ||
-                        c.getVietnamese().toLowerCase().contains(lower)) {
-                    filteredList.add(c);
-                }
-            }
-        }
-        notifyDataSetChanged();
-    }
-    public void updateCards(List<Card> newCards) {
-        cardList.clear();
-        cardList.addAll(newCards);
-
-        filteredList.clear();
-        filteredList.addAll(newCards);
-
-        notifyDataSetChanged();
-    }
-
 }

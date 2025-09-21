@@ -1,18 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- Spinner as ActionView -->
     <item
         android:id="@+id/action_deck_spinner"
-        android:title="Decks"
+        android:title="@string/decks"
         app:showAsAction="always"
         app:actionViewClass="android.widget.Spinner" />
 
-    <!-- Search button on the right -->
     <item
         android:id="@+id/action_search"
         android:icon="@drawable/search"
-        android:title="Search"
+        android:title="@string/search"
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:iconTint="?attr/colorOnPrimary" />

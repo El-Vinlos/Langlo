@@ -1,5 +1,27 @@
 <resources>
     <string name="app_name" translatable="false">Langlo</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>>
+    <string name="navigation_drawer_open">Mở side menu</string>
+    <string name="navigation_drawer_close">Đóng side menu</string>>
+    <string name="btn_next">Tiếp theo</string>
+    <string name="btn_show_answer">Hiện đáp án</string>
+    <string name="out_of_card">Hết thẻ rồi</string>
+    <string name="Question">Tiếng Anh</string>
+    <string name="Answer">Tiếng Việt</string>
+    <string name="decks">Decks</string>
+    <string name="search">Search</string>
+    <string name="home_menu">Thẻ bài tập</string>
+    <string name="card_menu">Xem thẻ</string>
+    <string name="setting_menu">Cài đặt</string>
+    <string name="user">Tài khoản người dùng</string>
+    <string name="speaker">Nghe</string>
+    <string name="view_card">Xem thẻ</string>
+    <string name="more_options">lựa chọn thêm\n</string>
+    <string name="filter_by_category">Lọc theo chủ đề</string>
+    <string name="clear_filter">bỏ lọc</string>
+    <string name="select_categories">Chọn chủ đề</string>
+    <string name="apply">Lọc</string>
+    <string name="cancel">Hủy</string>
+    <string name="no_categories_available">Không có chủ đề</string>
+    <string name="filter_applied">lọc thành công</string>
+    <string name="filter_failed">lọc lỗi</string>
 </resources>
