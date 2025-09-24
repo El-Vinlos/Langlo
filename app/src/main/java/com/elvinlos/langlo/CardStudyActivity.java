@@ -40,8 +40,10 @@ public class CardStudyActivity extends AppCompatActivity {
     private TextToSpeech tts;
     private boolean ttsReady = false;
 
-    private final List<Card> allCards = new ArrayList<>();   // full deck
-    private List<Card> workingCards = new ArrayList<>();     // filtered/shuffled deck
+    private final Set<String> selectedCategories = new HashSet<>();
+
+    private final List<Card> allCards = new ArrayList<>();
+    private List<Card> workingCards = new ArrayList<>();
     private int currentIndex = 0;
     private boolean showingTranslation = false;
     private final Set<String> categories = new HashSet<>();
@@ -263,29 +265,34 @@ public class CardStudyActivity extends AppCompatActivity {
         String[] categoryArray = categories.toArray(new String[0]);
         boolean[] checkedItems = new boolean[categoryArray.length];
 
+        for (int i = 0; i < categoryArray.length; i++) {
+            checkedItems[i] = selectedCategories.contains(categoryArray[i]);
+        }
+
         new MaterialAlertDialogBuilder(this, R.style.CustomMaterialAlertDialog)
                 .setTitle(R.string.select_categories)
-                .setMultiChoiceItems(categoryArray, checkedItems, (dialog, which, isChecked) -> checkedItems[which] = isChecked)
+                .setMultiChoiceItems(categoryArray, checkedItems,
+                        (dialog, which, isChecked) -> checkedItems[which] = isChecked)
                 .setPositiveButton(R.string.apply, (dialog, which) -> {
-                    List<String> selectedCategories = new ArrayList<>();
+                    selectedCategories.clear(); // reset
                     for (int i = 0; i < checkedItems.length; i++) {
                         if (checkedItems[i]) {
                             selectedCategories.add(categoryArray[i]);
                         }
                     }
-                    applyCategoryFilter(selectedCategories);
+                    applyCategoryFilter(new ArrayList<>(selectedCategories));
                 })
                 .setNegativeButton(R.string.cancel, null)
                 .show();
     }
 
-    private void applyCategoryFilter(List<String> selectedCategories) {
-        if (selectedCategories.isEmpty()) {
+    private void applyCategoryFilter(List<String> categoriesToApply) {
+        if (categoriesToApply.isEmpty()) {
             workingCards = new ArrayList<>(allCards);
         } else {
             workingCards = new ArrayList<>();
             for (Card card : allCards) {
-                if (selectedCategories.contains(card.getCategory())) {
+                if (categoriesToApply.contains(card.getCategory())) {
                     workingCards.add(card);
                 }
             }
