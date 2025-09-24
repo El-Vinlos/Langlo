@@ -2,10 +2,14 @@
 
     <!-- App Theme -->
     <style name="LangloDefaultTheme" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">#03060D</item>
-        <item name="colorOnPrimary">#D9D9D9</item>
-        <item name="colorSecondary">#202328</item>
-        <item name="colorOnSecondary">#D9D9D9</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="colorOnBackground">@color/colorOnBackground</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
     </style>
 
     <!-- Custom MaterialAlertDialog -->
@@ -27,8 +31,9 @@
         <item name="android:textColor">?attr/colorOnSecondary</item>
     </style>
 
+    <!-- Positive Button -->
     <style name="CustomDialogButtonPositive" parent="Widget.Material3.Button.TextButton.Dialog">
-        <item name="android:textColor">#D9D9D9</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
         <item name="android:textAllCaps">false</item>
     </style>
 
