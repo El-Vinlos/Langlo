@@ -4,7 +4,8 @@
             "id": "1",
             "english": "Great to see you again.",
             "vietnamese": "Rất vui khi gặp lại bạn.",
-            "category": "Hello"
+            "category": "test",
+            "audio": "test.mp3"
         },
         {
             "id": "2",
@@ -38,8 +39,8 @@
         },
         {
             "id": "7",
-            "english": "Haven’t seen you ",
-            "vietnamese": " Lâu rồi không gặp bạn.",
+            "english": "Haven’t seen you",
+            "vietnamese": "Lâu rồi không gặp bạn.",
             "category": "Hello"
         },
         {
@@ -94,175 +95,175 @@
             "id": "16",
             "english": "So long.",
             "vietnamese": "Tạm biệt!",
-            "category": "Goodbye "
+            "category": "Goodbye"
         },
         {
             "id": "17",
             "english": "Bye for now!",
             "vietnamese": "Tạm biệt nhé!",
-            "category": "Goodbye "
+            "category": "Goodbye"
         },
         {
             "id": "18",
             "english": "Alright then.",
             "vietnamese": "Tạm biệt!",
-            "category": "Goodbye "
+            "category": "Goodbye"
         },
         {
             "id": "19",
             "english": "See you! / See ya!",
             "vietnamese": "Tạm biệt bạn.",
-            "category": "Goodbye "
+            "category": "Goodbye"
         },
         {
             "id": "20",
             "english": "Have a good one.",
             "vietnamese": "Chúc một ngày tốt lành.",
-            "category": "Goodbye "
+            "category": "Goodbye"
         },
         {
             "id": "21",
             "english": "Be seeing you!",
             "vietnamese": "Hẹn gặp lại!",
-            "category": "Goodbye "
+            "category": "Goodbye"
         },
         {
             "id": "22",
             "english": "See you later. / Talk to you later.",
             "vietnamese": "Gặp lại bạn sau. / Nói chuyện với bạn sau nhé!",
-            "category": "Goodbye "
+            "category": "Goodbye"
         },
         {
             "id": "23",
             "english": "See you soon!",
             "vietnamese": "Mong sớm gặp lại bạn!",
-            "category": "Goodbye "
+            "category": "Goodbye"
         },
         {
             "id": "24",
             "english": "Later!",
             "vietnamese": "Gặp lại sau!",
-            "category": "Goodbye "
+            "category": "Goodbye"
         },
         {
             "id": "25",
             "english": "I’m off.",
             "vietnamese": "Tôi đi đây.",
-            "category": "Goodbye "
+            "category": "Goodbye"
         },
         {
             "id": "26",
             "english": "Smell you later.",
             "vietnamese": "Hẹn gặp lại bạn sau.",
-            "category": "Goodbye "
+            "category": "Goodbye"
         },
         {
             "id": "27",
             "english": "Catch you later!",
             "vietnamese": "Gặp lại bạn sau!",
-            "category": "Goodbye "
+            "category": "Goodbye"
         },
         {
             "id": "28",
             "english": "Peace!",
             "vietnamese": "Tạm biệt!",
-            "category": "Goodbye "
+            "category": "Goodbye"
         },
         {
             "id": "29",
             "english": "Good night!",
             "vietnamese": "Chúc ngủ ngon!",
-            "category": "Goodbye "
+            "category": "Goodbye"
         },
         {
             "id": "30",
             "english": "Bye!",
             "vietnamese": "Tạm biệt!",
-            "category": "Goodbye "
+            "category": "Goodbye"
         },
         {
             "id": "31",
             "english": "Farewell.",
             "vietnamese": "Tạm biệt!",
-            "category": "Goodbye "
+            "category": "Goodbye"
         },
         {
             "id": "32",
             "english": "Goodbye!",
             "vietnamese": "Tạm biệt nhé!",
-            "category": "Goodbye "
+            "category": "Goodbye"
         },
         {
             "id": "33",
             "english": "That’s very kind of you.",
             "vietnamese": "Bạn thật tốt với tôi.",
-            "category": "Thank You "
+            "category": "Thank You"
         },
         {
             "id": "34",
             "english": "Thank you very much.",
             "vietnamese": "Cảm ơn rất nhiều.",
-            "category": "Thank You "
+            "category": "Thank You"
         },
         {
             "id": "35",
             "english": "Thanks a lot.",
             "vietnamese": "Cảm ơn rất nhiều.",
-            "category": "Thank You "
+            "category": "Thank You"
         },
         {
             "id": "36",
             "english": "I really appreciate it.",
             "vietnamese": "Tôi thật sự ghi nhận sự giúp đỡ của bạn.",
-            "category": "Thank You "
+            "category": "Thank You"
         },
         {
             "id": "37",
             "english": "You’ve made my day.",
             "vietnamese": "Bạn đã làm nên một ngày tuyệt vời cho tôi.",
-            "category": "Thank You "
+            "category": "Thank You"
         },
         {
             "id": "38",
             "english": "How thoughtful.",
             "vietnamese": "Bạn thật chu đáo.",
-            "category": "Thank You "
+            "category": "Thank You"
         },
         {
             "id": "39",
             "english": "You shouldn’t have.",
             "vietnamese": "Bạn không cần làm vậy đâu.",
-            "category": "Thank You "
+            "category": "Thank You"
         },
         {
             "id": "40",
             "english": "That’s so kind of you.",
             "vietnamese": "Bạn thật tốt với tôi.",
-            "category": "Thank You "
+            "category": "Thank You"
         },
         {
             "id": "41",
             "english": "I am most grateful.",
             "vietnamese": "Tôi thật sự biết ơn vì điều này.",
-            "category": "Thank You "
+            "category": "Thank You"
         },
         {
             "id": "42",
             "english": "Thanks.",
-            "vietnamese": " Cảm ơn.",
-            "category": "Thank You "
+            "vietnamese": "Cảm ơn.",
+            "category": "Thank You"
         },
         {
             "id": "43",
             "english": "We would like to express our gratitude…",
             "vietnamese": "Chúng tôi muốn bày tỏ sự biết ơn tới…",
-            "category": "Thank You "
+            "category": "Thank You"
         },
         {
             "id": "44",
             "english": "Cheers.",
             "vietnamese": "Cảm ơn/ Chúc mừng.",
-            "category": "Thank You "
+            "category": "Thank You"
         },
         {
             "id": "45",
@@ -393,7 +394,7 @@
         {
             "id": "66",
             "english": "Sorry.",
-            "vietnamese": " ",
+            "vietnamese": "",
             "category": "Sorry"
         },
         {
@@ -446,14 +447,14 @@
         },
         {
             "id": "75",
-            "english": " Nuh ahh / Hell no!",
+            "english": "Nuh ahh / Hell no!",
             "vietnamese": "Không nhé!",
             "category": "Saying No"
         },
         {
             "id": "76",
-            "english": " In a word, no.",
-            "vietnamese": " Một từ thôi, không.",
+            "english": "In a word, no.",
+            "vietnamese": "Một từ thôi, không.",
             "category": "Saying No"
         },
         {
@@ -506,8 +507,8 @@
         },
         {
             "id": "85",
-            "english": " That’s a great idea.",
-            "vietnamese": " Đó là ý tưởng tuyệt vời.",
+            "english": "That’s a great idea.",
+            "vietnamese": "Đó là ý tưởng tuyệt vời.",
             "category": "Talking About Good Idea"
         },
         {
@@ -560,8 +561,8 @@
         },
         {
             "id": "94",
-            "english": " He knows all about photography.",
-            "vietnamese": " Anh ấy biết tất tần tật về nhiếp ảnh.",
+            "english": "He knows all about photography.",
+            "vietnamese": "Anh ấy biết tất tần tật về nhiếp ảnh.",
             "category": "Being An Expert In English"
         },
         {
@@ -590,7 +591,7 @@
         },
         {
             "id": "99",
-            "english": " Great!",
+            "english": "Great!",
             "vietnamese": "Tuyệt vời, xuất sắc!",
             "category": "Ways To Say Well Done"
         },
@@ -686,8 +687,8 @@
         },
         {
             "id": "115",
-            "english": " Good for you!",
-            "vietnamese": " Chúc mừng, tốt lắm đó.",
+            "english": "Good for you!",
+            "vietnamese": "Chúc mừng, tốt lắm đó.",
             "category": "Ways To Say Well Done"
         },
         {
@@ -753,7 +754,7 @@
         {
             "id": "126",
             "english": "It’s a breeze.",
-            "vietnamese": " Nó quá dễ.",
+            "vietnamese": "Nó quá dễ.",
             "category": "Say Things Are Easy"
         },
         {
@@ -782,19 +783,19 @@
         },
         {
             "id": "131",
-            "english": " It’s (quite/ a bit) hard going../ It’s kinda tough.",
+            "english": "It’s (quite/ a bit) hard going../ It’s kinda tough.",
             "vietnamese": "Nó khá khó nhằn.",
             "category": "Say Something Is Difficult"
         },
         {
             "id": "132",
-            "english": " It’s nearly impossible..",
+            "english": "It’s nearly impossible..",
             "vietnamese": "Nó gần như là điều không thể.",
             "category": "Say Something Is Difficult"
         },
         {
             "id": "133",
-            "english": " The course is really demanding / The course is quite demanding.",
+            "english": "The course is really demanding / The course is quite demanding.",
             "vietnamese": "Cách này đòi hỏi rất nhiều công sức.",
             "category": "Say Something Is Difficult"
         },
@@ -806,19 +807,19 @@
         },
         {
             "id": "135",
-            "english": " It’s not a walk in the park",
+            "english": "It’s not a walk in the park",
             "vietnamese": "Việc này không (dễ) như đi dạo trong công viên đâu.",
             "category": "Say Something Is Difficult"
         },
         {
             "id": "136",
-            "english": " It’s not so easy…",
-            "vietnamese": " Nó không quá dễ để…",
+            "english": "It’s not so easy…",
+            "vietnamese": "Nó không quá dễ để…",
             "category": "Say Something Is Difficult"
         },
         {
             "id": "137",
-            "english": " It’s a bear / It’s a real bear..",
+            "english": "It’s a bear / It’s a real bear..",
             "vietnamese": "Thực sự rất khó.",
             "category": "Say Something Is Difficult"
         },
@@ -836,7 +837,7 @@
         },
         {
             "id": "140",
-            "english": " Right on! / That’s right on",
+            "english": "Right on! / That’s right on",
             "vietnamese": "Chính là nó.",
             "category": "Say Something Is Correct"
         },
@@ -860,8 +861,8 @@
         },
         {
             "id": "144",
-            "english": " Yes, that’s right / Yeah, that’s right.",
-            "vietnamese": " Đúng, chính xác.",
+            "english": "Yes, that’s right / Yeah, that’s right.",
+            "vietnamese": "Đúng, chính xác.",
             "category": "Say Something Is Correct"
         },
         {
@@ -872,7 +873,7 @@
         },
         {
             "id": "146",
-            "english": " Bologna! / What a bunch of bologna! / That’s bologna!",
+            "english": "Bologna! / What a bunch of bologna! / That’s bologna!",
             "vietnamese": "Nhảm! Vô lý! / Bạn đang nói bậy nói bạ.",
             "category": "Say Something Is Wrong"
         },
@@ -932,8 +933,8 @@
         },
         {
             "id": "156",
-            "english": " You could say so.",
-            "vietnamese": " Có thể nói như vậy.",
+            "english": "You could say so.",
+            "vietnamese": "Có thể nói như vậy.",
             "category": "Say Something Is Wrong"
         },
         {
@@ -944,7 +945,7 @@
         },
         {
             "id": "158",
-            "english": " I’m afraid so. / I’m afraid not.",
+            "english": "I’m afraid so. / I’m afraid not.",
             "vietnamese": "Tôi e là vậy.",
             "category": "Say Something Is Wrong"
         },
@@ -968,7 +969,7 @@
         },
         {
             "id": "162",
-            "english": " My take on it is…",
+            "english": "My take on it is…",
             "vietnamese": "Điều tôi tìm ra đó là…",
             "category": "Giving An Opinion"
         },
@@ -1016,8 +1017,8 @@
         },
         {
             "id": "170",
-            "english": " I reckon…",
-            "vietnamese": " Tôi đoán/ cho là…",
+            "english": "I reckon…",
+            "vietnamese": "Tôi đoán/ cho là…",
             "category": "Giving An Opinion"
         },
         {
@@ -1076,8 +1077,8 @@
         },
         {
             "id": "180",
-            "english": " Off the top of my head, I think she’s 26.",
-            "vietnamese": " Hiện ra ngay trong đầu tôi lúc đó là ý nghĩ cô ấy 26 tuổi.",
+            "english": "Off the top of my head, I think she’s 26.",
+            "vietnamese": "Hiện ra ngay trong đầu tôi lúc đó là ý nghĩ cô ấy 26 tuổi.",
             "category": "Having A Guess"
         },
         {
@@ -1136,8 +1137,8 @@
         },
         {
             "id": "190",
-            "english": " I reckon you should stop now.",
-            "vietnamese": " Tôi nghĩ bạn nên ngừng lại ngay.",
+            "english": "I reckon you should stop now.",
+            "vietnamese": "Tôi nghĩ bạn nên ngừng lại ngay.",
             "category": "Advice And Suggestions"
         },
         {
@@ -1178,7 +1179,7 @@
         },
         {
             "id": "197",
-            "english": " If only it would be sunny…/ I wish it would be sunny",
+            "english": "If only it would be sunny…/ I wish it would be sunny",
             "vietnamese": "Tôi hy vọng ngày mai sẽ là một ngày nắng.",
             "category": "Hoping For Something"
         },
@@ -1190,8 +1191,8 @@
         },
         {
             "id": "199",
-            "english": " I hope it’s sunny tomorrow.",
-            "vietnamese": " Tôi hy vọng ngày mai sẽ là một ngày nắng.",
+            "english": "I hope it’s sunny tomorrow.",
+            "vietnamese": "Tôi hy vọng ngày mai sẽ là một ngày nắng.",
             "category": "Hoping For Something"
         },
         {
@@ -1250,8 +1251,8 @@
         },
         {
             "id": "209",
-            "english": " It’s probably going to rain tomorrow.",
-            "vietnamese": " Chắc chắn trời sẽ mưa vào ngày mai.",
+            "english": "It’s probably going to rain tomorrow.",
+            "vietnamese": "Chắc chắn trời sẽ mưa vào ngày mai.",
             "category": "Possibility"
         },
         {
@@ -1310,8 +1311,8 @@
         },
         {
             "id": "219",
-            "english": " Don’t forget to do it.",
-            "vietnamese": " Đừng quên làm điều đó.",
+            "english": "Don’t forget to do it.",
+            "vietnamese": "Đừng quên làm điều đó.",
             "category": "Reminding People To Do Things"
         },
         {
@@ -1358,7 +1359,7 @@
         },
         {
             "id": "227",
-            "english": " I like it / I’m partial to it.",
+            "english": "I like it / I’m partial to it.",
             "vietnamese": "Tôi thích nó. / Tôi là một phần của nó.",
             "category": "Like"
         },
@@ -1382,8 +1383,8 @@
         },
         {
             "id": "231",
-            "english": " I’m really into it.",
-            "vietnamese": " Tôi thực sự thích nó.",
+            "english": "I’m really into it.",
+            "vietnamese": "Tôi thực sự thích nó.",
             "category": "Like"
         },
         {
@@ -1394,7 +1395,7 @@
         },
         {
             "id": "233",
-            "english": " I’m stoked on it.",
+            "english": "I’m stoked on it.",
             "vietnamese": "Tôi hứng thú với nó… muốn hiểu thêm về nó.",
             "category": "Like"
         },
@@ -1454,7 +1455,7 @@
         },
         {
             "id": "243",
-            "english": " I’m not a big fan of cheating.",
+            "english": "I’m not a big fan of cheating.",
             "vietnamese": "Tôi không phải là fan của sự lừa dối.",
             "category": "Dislike"
         },
@@ -1466,8 +1467,8 @@
         },
         {
             "id": "245",
-            "english": " I don’t really like cheating.",
-            "vietnamese": " Tôi thật sự không thích gian lận.",
+            "english": "I don’t really like cheating.",
+            "vietnamese": "Tôi thật sự không thích gian lận.",
             "category": "Dislike"
         },
         {
@@ -1526,8 +1527,8 @@
         },
         {
             "id": "255",
-            "english": " I’d really like / I’d love a day off.",
-            "vietnamese": " Tôi thực sự muốn có một ngày nghỉ.",
+            "english": "I’d really like / I’d love a day off.",
+            "vietnamese": "Tôi thực sự muốn có một ngày nghỉ.",
             "category": "Wanting Things"
         },
         {
@@ -1544,7 +1545,7 @@
         },
         {
             "id": "258",
-            "english": " Forget it / Forget about it.",
+            "english": "Forget it / Forget about it.",
             "vietnamese": "Quên nó đi.",
             "category": "Tell Someone Not To Be Worried"
         },
@@ -1562,7 +1563,7 @@
         },
         {
             "id": "261",
-            "english": " Don’t panic / No worries..",
+            "english": "Don’t panic / No worries..",
             "vietnamese": "Đừng sợ.",
             "category": "Tell Someone Not To Be Worried"
         },
@@ -1574,8 +1575,8 @@
         },
         {
             "id": "263",
-            "english": " Suck it up.",
-            "vietnamese": " Cố mà chịu đựng đi!",
+            "english": "Suck it up.",
+            "vietnamese": "Cố mà chịu đựng đi!",
             "category": "Tell Someone Not To Be Worried"
         },
         {
@@ -1634,8 +1635,8 @@
         },
         {
             "id": "273",
-            "english": " Cheer up!",
-            "vietnamese": " Vui lên nào!",
+            "english": "Cheer up!",
+            "vietnamese": "Vui lên nào!",
             "category": "Cheering People Up"
         },
         {
@@ -1802,8 +1803,8 @@
         },
         {
             "id": "301",
-            "english": " It’s great.",
-            "vietnamese": " Nó thật tuyệt.",
+            "english": "It’s great.",
+            "vietnamese": "Nó thật tuyệt.",
             "category": "Say Things Are Good"
         },
         {
@@ -1862,8 +1863,8 @@
         },
         {
             "id": "311",
-            "english": " I don’t believe it!",
-            "vietnamese": " Tôi không tin điều đó!",
+            "english": "I don’t believe it!",
+            "vietnamese": "Tôi không tin điều đó!",
             "category": "Saying When Being Angry"
         },
         {
@@ -1922,8 +1923,8 @@
         },
         {
             "id": "321",
-            "english": " I’m fine thank you.",
-            "vietnamese": " Tôi ổn, cảm ơn.",
+            "english": "I’m fine thank you.",
+            "vietnamese": "Tôi ổn, cảm ơn.",
             "category": "Ways To Say That You’re Well"
         },
         {
@@ -1982,8 +1983,8 @@
         },
         {
             "id": "331",
-            "english": " Phew!",
-            "vietnamese": " Phù!",
+            "english": "Phew!",
+            "vietnamese": "Phù!",
             "category": "Being Relieved"
         },
         {
@@ -2042,8 +2043,8 @@
         },
         {
             "id": "341",
-            "english": " I’m (so) worried about…",
-            "vietnamese": " Tôi thật sự lo lắng về…",
+            "english": "I’m (so) worried about…",
+            "vietnamese": "Tôi thật sự lo lắng về…",
             "category": "Being Worried"
         },
         {
@@ -2102,8 +2103,8 @@
         },
         {
             "id": "351",
-            "english": " How boring / tedious / dull !",
-            "vietnamese": " Thật nhàm chán/ tẻ nhạt/ ngu ngốc làm sao!",
+            "english": "How boring / tedious / dull !",
+            "vietnamese": "Thật nhàm chán/ tẻ nhạt/ ngu ngốc làm sao!",
             "category": "Boring"
         },
         {
@@ -2162,8 +2163,8 @@
         },
         {
             "id": "361",
-            "english": " Sorry. I don’t know.",
-            "vietnamese": " Xin lỗi, tôi không biết.",
+            "english": "Sorry. I don’t know.",
+            "vietnamese": "Xin lỗi, tôi không biết.",
             "category": "Don’t Know"
         },
         {
@@ -2216,8 +2217,8 @@
         },
         {
             "id": "370",
-            "english": " Why don’t we go to the cinema?",
-            "vietnamese": " Tại sao chúng ta lại không đi xem phim nhỉ?",
+            "english": "Why don’t we go to the cinema?",
+            "vietnamese": "Tại sao chúng ta lại không đi xem phim nhỉ?",
             "category": "Making Suggestions"
         },
         {
@@ -2306,8 +2307,8 @@
         },
         {
             "id": "385",
-            "english": " Can you give me a hand with this?",
-            "vietnamese": " Bạn có thể giúp tôi một tay không?",
+            "english": "Can you give me a hand with this?",
+            "vietnamese": "Bạn có thể giúp tôi một tay không?",
             "category": "Asking For Help"
         },
         {
@@ -2348,13 +2349,13 @@
         },
         {
             "id": "392",
-            "english": " Would you mind showing me ____?",
+            "english": "Would you mind showing me ____?",
             "vietnamese": "Bạn có thể chỉ cho tôi…?",
             "category": "Suggest Giving Help"
         },
         {
             "id": "393",
-            "english": " Do you know anything about ____?",
+            "english": "Do you know anything about ____?",
             "vietnamese": "Bạn có biết chút gì về…?",
             "category": "Suggest Giving Help"
         },
@@ -2414,8 +2415,8 @@
         },
         {
             "id": "403",
-            "english": " What do you think of…?",
-            "vietnamese": " Bạn nghĩ gì về…?",
+            "english": "What do you think of…?",
+            "vietnamese": "Bạn nghĩ gì về…?",
             "category": "Ask Somebody’s Opinion"
         },
         {
@@ -2486,8 +2487,8 @@
         },
         {
             "id": "415",
-            "english": " Can you tell me…?",
-            "vietnamese": " Bạn có thể nói cho tôi biết…?",
+            "english": "Can you tell me…?",
+            "vietnamese": "Bạn có thể nói cho tôi biết…?",
             "category": "Ask For Information"
         },
         {
@@ -2546,8 +2547,8 @@
         },
         {
             "id": "425",
-            "english": " How are you?",
-            "vietnamese": " Bạn khỏe không?",
+            "english": "How are you?",
+            "vietnamese": "Bạn khỏe không?",
             "category": "Ask About Health/Life"
         },
         {
@@ -2618,7 +2619,7 @@
         },
         {
             "id": "437",
-            "english": " I can manage myself thank you. Would you like a bag for ten cent extra?",
+            "english": "I can manage myself thank you. Would you like a bag for ten cent extra?",
             "vietnamese": "Tôi có thể tự lo liệu được, cảm ơn. Bạn có muốn thêm 10 xu để có chiếc túi không?",
             "category": "Supermarket Phrases"
         },
@@ -2660,7 +2661,7 @@
         },
         {
             "id": "444",
-            "english": " Where can I find the chocolate chip cookies? / Excuse me, where can I find the chocolate chip cookies?",
+            "english": "Where can I find the chocolate chip cookies? / Excuse me, where can I find the chocolate chip cookies?",
             "vietnamese": "Tôi có thể tìm bánh quy sô cô la ở đâu? / Xin lỗi, tôi có thể tìm bánh quy sô cô la ở đâu?",
             "category": "Supermarket Phrases"
         },
@@ -2702,7 +2703,7 @@
         },
         {
             "id": "451",
-            "english": "Could you please take a message? Please tell her/him that…",
+            "english": "Could you please take a message?Please tell her/him that…",
             "vietnamese": "Bạn có thể nhắn dùm tôi không? Hãy nói với cô ấy/ anh ấy rằng…?",
             "category": "On The Phone"
         },
@@ -2744,8 +2745,8 @@
         },
         {
             "id": "458",
-            "english": " I’ll call you later.",
-            "vietnamese": " Gọi lại cho bạn sau.",
+            "english": "I’ll call you later.",
+            "vietnamese": "Gọi lại cho bạn sau.",
             "category": "On The Phone"
         },
         {
@@ -2780,7 +2781,7 @@
         },
         {
             "id": "464",
-            "english": " It’s like the Arctic out there.",
+            "english": "It’s like the Arctic out there.",
             "vietnamese": "Ngoài kia lạnh như Bắc cực.",
             "category": "In The Airport"
         },
@@ -2792,7 +2793,7 @@
         },
         {
             "id": "466",
-            "english": " It’s chilly. Take a sweater",
+            "english": "It’s chilly. Take a sweater",
             "vietnamese": "Trời lạnh đấy. Mặc áo len đi.",
             "category": "In The Airport"
         },
@@ -2828,19 +2829,19 @@
         },
         {
             "id": "472",
-            "english": " It’s freezing outside!",
-            "vietnamese": " Bên ngoài trời lạnh cóng.",
+            "english": "It’s freezing outside!",
+            "vietnamese": "Bên ngoài trời lạnh cóng.",
             "category": "In The Airport"
         },
         {
             "id": "473",
-            "english": " I’ve gotta scrape the windsheild, it’s that cold..",
+            "english": "I’ve gotta scrape the windsheild, it’s that cold..",
             "vietnamese": "Tôi phải cạo kính chắn gió rồi. Lạnh thật.",
             "category": "In The Airport"
         },
         {
             "id": "474",
-            "english": " It’s kinda chilly. Wrap up warm.",
+            "english": "It’s kinda chilly. Wrap up warm.",
             "vietnamese": "Trời hơi lạnh đó. Nhớ mặc áo ấm.",
             "category": "In The Airport"
         },
@@ -2858,7 +2859,7 @@
         },
         {
             "id": "477",
-            "english": " I’m a hair stylist.",
+            "english": "I’m a hair stylist.",
             "vietnamese": "Tôi là nhà tạo mẫu tóc.",
             "category": "Jobs"
         },
@@ -2888,8 +2889,8 @@
         },
         {
             "id": "482",
-            "english": " I’m a hairdresser.",
-            "vietnamese": " Tôi là thợ cắt tóc.",
+            "english": "I’m a hairdresser.",
+            "vietnamese": "Tôi là thợ cắt tóc.",
             "category": "Jobs"
         },
         {

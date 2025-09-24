@@ -170,7 +170,7 @@ public class CardStudyActivity extends AppCompatActivity {
 
                 AssetManager assetManager = getAssets();
                 String deckName = getIntent().getStringExtra("deckName");
-                AssetFileDescriptor afd = assetManager.openFd("deck/" + deckName + "/audio/" + fileName);
+                AssetFileDescriptor afd = assetManager.openFd("deck/" + deckName + "/Audio/" + fileName);
 
                 mediaPlayer = new MediaPlayer();
                 mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
@@ -229,7 +229,7 @@ public class CardStudyActivity extends AppCompatActivity {
 
                 String english = obj.optString("english", "");
                 String vietnamese = obj.optString("vietnamese", "");
-                String audio = obj.optString("audio", null);
+                String audio = obj.optString("audio", "");
                 String category = obj.optString("category", "General");
 
                 if (english.isEmpty() || vietnamese.isEmpty()) {
@@ -262,7 +262,9 @@ public class CardStudyActivity extends AppCompatActivity {
             return;
         }
 
-        String[] categoryArray = categories.toArray(new String[0]);
+        List<String> sortedCategories = new ArrayList<>(categories);
+        Collections.sort(sortedCategories, String.CASE_INSENSITIVE_ORDER);
+        String[] categoryArray = sortedCategories.toArray(new String[0]);
         boolean[] checkedItems = new boolean[categoryArray.length];
 
         for (int i = 0; i < categoryArray.length; i++) {
