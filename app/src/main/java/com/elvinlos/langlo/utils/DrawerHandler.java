@@ -41,9 +41,9 @@ public class DrawerHandler {
             if (!(activity instanceof DeckActivity)) {
                 activity.startActivity(new Intent(activity, DeckActivity.class));
                 activity.finish();
+                topAppBar.getMenu().clear();
+                topAppBar.inflateMenu(R.menu.top_app_bar_deck);
             }
-            topAppBar.getMenu().clear();
-            topAppBar.inflateMenu(R.menu.top_app_bar_deck);
 
         } else if (id == R.id.nav_setting) {
             //TODO : ADD SETTING
