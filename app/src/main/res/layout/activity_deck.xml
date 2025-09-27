@@ -13,19 +13,10 @@
         android:background="?attr/colorPrimary">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/topAppBarDeck"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                android:theme="@style/ThemeOverlay.Material3.ActionBar"
-                app:navigationIcon="@drawable/list"
-                app:title=""
-                app:navigationIconTint="?attr/colorOnPrimary"
-                app:menu="@menu/top_app_bar_deck" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -37,11 +28,25 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:listitem="@layout/item_card" />
 
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBarDeck"
+            app:title=" "
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.Material3.Toolbar.Surface"
+            android:titleTextColor="?attr/colorPrimary"
+            app:layout_anchor="@+id/appBarLayout"
+            app:layout_anchorGravity="center"
+            app:menu="@menu/top_app_bar_deck"
+            app:navigationIcon="@drawable/list"
+            app:navigationIconTint="?attr/colorOnPrimary" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationViewDeck"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
