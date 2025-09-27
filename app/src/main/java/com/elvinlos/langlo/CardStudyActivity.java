@@ -4,8 +4,10 @@ import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -16,75 +18,38 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import android.speech.tts.TextToSpeech;
-import android.widget.Toast;
-
-import java.util.Locale;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.*;
 
 public class CardStudyActivity extends AppCompatActivity {
 
-    private TextView textCard_en;
-    private TextView textCard_vn;
+    private TextView textCardEn;
+    private TextView textCardVn;
     private MaterialButton btnAction;
     private MaterialButton btnPlayAudio;
+
     private MediaPlayer mediaPlayer;
     private TextToSpeech tts;
     private boolean ttsReady = false;
 
     private final Set<String> selectedCategories = new HashSet<>();
-
     private final List<Card> allCards = new ArrayList<>();
-    private List<Card> workingCards = new ArrayList<>();
+    private List<Card> workingCards = Collections.emptyList();
+    private final Set<String> categories = new HashSet<>();
+
     private int currentIndex = 0;
     private boolean showingTranslation = false;
-    private final Set<String> categories = new HashSet<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_study);
 
-        textCard_en = findViewById(R.id.textCard_en);
-        textCard_vn = findViewById(R.id.textCard_vn);
-        btnAction = findViewById(R.id.btnAction);
-        btnPlayAudio = findViewById(R.id.btnPlayAudio);
-        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
-
-        toolbar.setNavigationOnClickListener(v -> finish());
-
-        btnPlayAudio.setOnClickListener(v -> {
-            if (mediaPlayer != null) {
-                mediaPlayer.stop();
-                mediaPlayer.release();
-                mediaPlayer = null;
-            } else {
-                String audioFile = workingCards.get(currentIndex).getAudioFile();
-                playAudio(audioFile);
-            }
-        });
-
-        tts = new TextToSpeech(this, status -> {
-            if (status == TextToSpeech.SUCCESS) {
-                int result = tts.setLanguage(Locale.US);
-                if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                    Logger.e("CardStudy", "TTS language not supported");
-                } else {
-                    ttsReady = true;
-                    Logger.d("CardStudy", "TTS initialized successfully");
-                }
-            } else {
-                Logger.e("CardStudy", "TTS initialization failed");
-            }
-        });
+        initViews();
+        initToolbar();
 
         String deckName = getIntent().getStringExtra("deckName");
         loadCardsFromAssets(deckName);
@@ -95,78 +60,105 @@ public class CardStudyActivity extends AppCompatActivity {
             return;
         }
 
-        btnAction.setOnClickListener(v -> {
-            if (!showingTranslation) {
-                textCard_vn.setAlpha(1f);
-                btnAction.setText(R.string.btn_next);
-                btnAction.setIcon(AppCompatResources.getDrawable(this, R.drawable.arrow_right));
-                btnPlayAudio.setVisibility(View.VISIBLE);
-                showingTranslation = true;
-            } else {
-                currentIndex++;
-                if (currentIndex < workingCards.size()) {
-                    showCurrentCard();
-                } else {
-                    textCard_en.setText(R.string.out_of_card);
-                    textCard_vn.setText("");
-                    btnAction.setEnabled(false);
-                    btnPlayAudio.setVisibility(View.GONE);
-                }
-            }
-        });
-
-        toolbar.setOnMenuItemClickListener(item -> {
-            int id = item.getItemId();
-            if (id == R.id.action_filter) {
-                showCategoryFilterDialog();
-                return true;
-            } else if (id == R.id.action_clear_filter) {
-                workingCards = new ArrayList<>(allCards);
-                Collections.shuffle(workingCards);
-                currentIndex = 0;
-                showCurrentCard();
-                Toast.makeText(this, "Filter cleared", Toast.LENGTH_SHORT).show();
-                return true;
-            }
-            return false;
-        });
-
+        btnAction.setOnClickListener(v -> handleActionClick());
         showCurrentCard();
     }
 
     @Override
     protected void onDestroy() {
-        if (mediaPlayer != null) {
-            mediaPlayer.release();
-        }
-        if (tts != null) {
-            tts.stop();
-            tts.shutdown();
-        }
+        releaseMediaPlayer();
+        shutdownTts();
         super.onDestroy();
+    }
+
+    private void initViews() {
+        textCardEn = findViewById(R.id.textCard_en);
+        textCardVn = findViewById(R.id.textCard_vn);
+        btnAction = findViewById(R.id.btnAction);
+        btnPlayAudio = findViewById(R.id.btnPlayAudio);
+
+        btnPlayAudio.setOnClickListener(v -> toggleAudio());
+    }
+
+    private void initToolbar() {
+        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
+        toolbar.setNavigationOnClickListener(v -> finish());
+        toolbar.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.action_filter) {
+                showCategoryFilterDialog();
+                return true;
+            } else if (item.getItemId() == R.id.action_clear_filter) {
+                clearFilter();
+                return true;
+            }
+            return false;
+        });
+    }
+
+    private void initTts() {
+        tts = new TextToSpeech(this, status -> {
+            if (tts != null) return;
+            if (status != TextToSpeech.SUCCESS) {
+                Logger.e("CardStudy", "TTS initialization failed");
+                return;
+            }
+            int result = tts.setLanguage(Locale.US);
+            ttsReady = result != TextToSpeech.LANG_MISSING_DATA
+                    && result != TextToSpeech.LANG_NOT_SUPPORTED;
+            if (ttsReady) {
+                Logger.d("CardStudy", "TTS initialized successfully");
+            }
+        });
+    }
+
+    private void handleActionClick() {
+        if (!showingTranslation) {
+            textCardVn.setAlpha(1f);
+            btnAction.setText(R.string.btn_next);
+            btnPlayAudio.setVisibility(View.VISIBLE);
+            showingTranslation = true;
+            return;
+        }
+
+        currentIndex++;
+        if (currentIndex < workingCards.size()) {
+            showCurrentCard();
+        } else {
+            textCardEn.setText(R.string.out_of_card);
+            textCardVn.setText("");
+            btnAction.setEnabled(false);
+            btnPlayAudio.setVisibility(View.GONE);
+        }
     }
 
     private void showCurrentCard() {
         if (workingCards.isEmpty() || currentIndex >= workingCards.size()) return;
 
         Card card = workingCards.get(currentIndex);
-        textCard_en.setText(card.getEnglish());
-        textCard_vn.setText(card.getVietnamese());
+        textCardEn.setText(card.getEnglish());
+        textCardVn.setText(card.getVietnamese());
 
-        textCard_vn.setAlpha(0f);
+        textCardVn.setAlpha(0f);
         btnPlayAudio.setVisibility(View.GONE);
-
         btnAction.setText(R.string.btn_show_answer);
         btnAction.setIcon(AppCompatResources.getDrawable(this, R.drawable.star));
         showingTranslation = false;
     }
 
+    private void toggleAudio() {
+        initTts();
+
+        if (mediaPlayer != null) {
+            releaseMediaPlayer();
+        } else {
+            playAudio(workingCards.get(currentIndex).getAudioFile());
+        }
+    }
+
     private void playAudio(String fileName) {
         if (fileName != null && !fileName.isEmpty()) {
             try {
-                if (mediaPlayer != null) {
-                    mediaPlayer.release();
-                }
+                releaseMediaPlayer();
 
                 AssetManager assetManager = getAssets();
                 String deckName = getIntent().getStringExtra("deckName");
@@ -178,19 +170,17 @@ public class CardStudyActivity extends AppCompatActivity {
 
                 mediaPlayer.prepare();
                 mediaPlayer.start();
-
-                mediaPlayer.setOnCompletionListener(mp -> {
-                    mp.release();
-                    mediaPlayer = null;
-                });
-
+                mediaPlayer.setOnCompletionListener(mp -> releaseMediaPlayer());
                 return;
             } catch (Exception e) {
                 Logger.e("CardStudy", "Error playing audio: " + fileName + ", falling back to TTS", e);
             }
         }
 
-        String text = workingCards.get(currentIndex).getEnglish();
+        speakWithTts(workingCards.get(currentIndex).getEnglish());
+    }
+
+    private void speakWithTts(String text) {
         if (ttsReady && tts != null && text != null && !text.isEmpty()) {
             tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, "CardTTS");
             Logger.d("CardStudy", "Speaking with TTS: " + text);
@@ -200,14 +190,8 @@ public class CardStudyActivity extends AppCompatActivity {
     }
 
     private void loadCardsFromAssets(String deckName) {
-        try {
-            AssetManager assetManager = getAssets();
-            String path = "deck/" + deckName + "/cards.json";
-
-            Logger.d("CardStudy", "Loading cards from: " + path);
-
-            InputStream is = assetManager.open(path);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        try (InputStream is = getAssets().open("deck/" + deckName + "/cards.json");
+             BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
 
             StringBuilder jsonBuilder = new StringBuilder();
             String line;
@@ -215,11 +199,9 @@ public class CardStudyActivity extends AppCompatActivity {
                 jsonBuilder.append(line);
             }
 
-            JSONObject root = new JSONObject(jsonBuilder.toString());
-            JSONArray arr = root.optJSONArray("cards");
-
+            JSONArray arr = new JSONObject(jsonBuilder.toString()).optJSONArray("cards");
             if (arr == null || arr.length() == 0) {
-                Logger.e("CardStudy", "Deck has no cards, skipping load");
+                Logger.e("CardStudy", "Deck has no cards");
                 return;
             }
 
@@ -246,9 +228,7 @@ public class CardStudyActivity extends AppCompatActivity {
             if (!allCards.isEmpty()) {
                 workingCards = new ArrayList<>(allCards);
                 Collections.shuffle(workingCards);
-                Logger.d("CardStudy", "Cards shuffled. Total cards loaded: " + allCards.size());
-            } else {
-                Logger.e("CardStudy", "No valid cards loaded from JSON");
+                Logger.d("CardStudy", "Cards shuffled. Total loaded: " + allCards.size());
             }
 
         } catch (Exception e) {
@@ -263,7 +243,7 @@ public class CardStudyActivity extends AppCompatActivity {
         }
 
         List<String> sortedCategories = new ArrayList<>(categories);
-        Collections.sort(sortedCategories, String.CASE_INSENSITIVE_ORDER);
+        sortedCategories.sort(String.CASE_INSENSITIVE_ORDER);
         String[] categoryArray = sortedCategories.toArray(new String[0]);
         boolean[] checkedItems = new boolean[categoryArray.length];
 
@@ -273,14 +253,11 @@ public class CardStudyActivity extends AppCompatActivity {
 
         new MaterialAlertDialogBuilder(this, R.style.CustomMaterialAlertDialog)
                 .setTitle(R.string.select_categories)
-                .setMultiChoiceItems(categoryArray, checkedItems,
-                        (dialog, which, isChecked) -> checkedItems[which] = isChecked)
+                .setMultiChoiceItems(categoryArray, checkedItems, (dialog, which, isChecked) -> checkedItems[which] = isChecked)
                 .setPositiveButton(R.string.apply, (dialog, which) -> {
-                    selectedCategories.clear(); // reset
+                    selectedCategories.clear();
                     for (int i = 0; i < checkedItems.length; i++) {
-                        if (checkedItems[i]) {
-                            selectedCategories.add(categoryArray[i]);
-                        }
+                        if (checkedItems[i]) selectedCategories.add(categoryArray[i]);
                     }
                     applyCategoryFilter(new ArrayList<>(selectedCategories));
                 })
@@ -289,16 +266,9 @@ public class CardStudyActivity extends AppCompatActivity {
     }
 
     private void applyCategoryFilter(List<String> categoriesToApply) {
-        if (categoriesToApply.isEmpty()) {
-            workingCards = new ArrayList<>(allCards);
-        } else {
-            workingCards = new ArrayList<>();
-            for (Card card : allCards) {
-                if (categoriesToApply.contains(card.getCategory())) {
-                    workingCards.add(card);
-                }
-            }
-        }
+        workingCards = categoriesToApply.isEmpty()
+                ? new ArrayList<>(allCards)
+                : filterCardsByCategories(categoriesToApply);
 
         if (!workingCards.isEmpty()) {
             Collections.shuffle(workingCards);
@@ -307,6 +277,38 @@ public class CardStudyActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.filter_applied, Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, R.string.filter_failed, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private List<Card> filterCardsByCategories(List<String> categoriesToApply) {
+        List<Card> filtered = new ArrayList<>();
+        for (Card card : allCards) {
+            if (categoriesToApply.contains(card.getCategory())) {
+                filtered.add(card);
+            }
+        }
+        return filtered;
+    }
+
+    private void clearFilter() {
+        workingCards = new ArrayList<>(allCards);
+        Collections.shuffle(workingCards);
+        currentIndex = 0;
+        showCurrentCard();
+        Toast.makeText(this, "Filter cleared", Toast.LENGTH_SHORT).show();
+    }
+
+    private void releaseMediaPlayer() {
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
+
+    private void shutdownTts() {
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
         }
     }
 }
