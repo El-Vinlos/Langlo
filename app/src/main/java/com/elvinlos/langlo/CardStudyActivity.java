@@ -96,21 +96,23 @@ public class CardStudyActivity extends AppCompatActivity {
     }
 
     private void initTts() {
+        if (tts != null) return;
+
         tts = new TextToSpeech(this, status -> {
-            if (tts != null) return;
             if (status != TextToSpeech.SUCCESS) {
                 Logger.e("CardStudy", "TTS initialization failed");
                 return;
             }
+
             int result = tts.setLanguage(Locale.US);
             ttsReady = result != TextToSpeech.LANG_MISSING_DATA
                     && result != TextToSpeech.LANG_NOT_SUPPORTED;
+
             if (ttsReady) {
                 Logger.d("CardStudy", "TTS initialized successfully");
             }
         });
     }
-
     private void handleActionClick() {
         if (!showingTranslation) {
             textCardVn.setAlpha(1f);
