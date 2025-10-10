@@ -1,4 +1,4 @@
-package com.elvinlos.langlo;
+package com.elvinlos.langlo.ui.deck;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.elvinlos.langlo.ui.cardstudy.CardStudyActivity;
+import com.elvinlos.langlo.Deck;
+import com.elvinlos.langlo.R;
+
 import java.util.List;
 
 public class DeckAdapter extends RecyclerView.Adapter<DeckAdapter.DeckViewHolder> {

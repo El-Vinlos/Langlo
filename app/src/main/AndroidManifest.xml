@@ -12,17 +12,17 @@
         android:theme="@style/LangloDefaultTheme">
 
         <activity
-            android:name=".DeckActivity"
+            android:name=".ui.deck.DeckActivity"
             android:label="Decks"
             android:exported="false" />
 
 
         <activity
-            android:name=".CardStudyActivity"
+            android:name=".ui.cardstudy.CardStudyActivity"
             android:exported="false" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

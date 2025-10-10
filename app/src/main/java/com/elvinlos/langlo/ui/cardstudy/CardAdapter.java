@@ -1,4 +1,4 @@
-package com.elvinlos.langlo;
+package com.elvinlos.langlo.ui.cardstudy;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.elvinlos.langlo.Card;
+import com.elvinlos.langlo.R;
 
 public class CardAdapter extends ListAdapter<Card, CardAdapter.CardViewHolder> {
 

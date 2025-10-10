@@ -1,4 +1,4 @@
-package com.elvinlos.langlo;
+package com.elvinlos.langlo.ui.cardstudy;
 
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
@@ -12,6 +12,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 
+import com.elvinlos.langlo.Card;
+import com.elvinlos.langlo.R;
+import com.elvinlos.langlo.utils.Logger;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
