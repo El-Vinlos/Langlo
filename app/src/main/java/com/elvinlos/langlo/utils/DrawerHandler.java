@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.elvinlos.langlo.DeckActivity;
-import com.elvinlos.langlo.MainActivity;
+import com.elvinlos.langlo.ui.deck.DeckActivity;
+import com.elvinlos.langlo.ui.main.MainActivity;
 import com.elvinlos.langlo.R;
 import com.google.android.material.appbar.MaterialToolbar;
 

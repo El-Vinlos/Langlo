@@ -1,6 +1,8 @@
-package com.elvinlos.langlo;
+package com.elvinlos.langlo.utils;
 
 import android.util.Log;
+
+import com.elvinlos.langlo.BuildConfig;
 
 public class Logger {
     // BuildConfig.DEBUG is true in Debug builds, false in Release builds

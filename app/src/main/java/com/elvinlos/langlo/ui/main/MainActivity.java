@@ -1,4 +1,4 @@
-package com.elvinlos.langlo;
+package com.elvinlos.langlo.ui.main;
 
 import android.content.res.AssetManager;
 import android.os.Bundle;
@@ -13,7 +13,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.elvinlos.langlo.Deck;
+import com.elvinlos.langlo.ui.deck.DeckAdapter;
+import com.elvinlos.langlo.R;
 import com.elvinlos.langlo.utils.DrawerHandler;
+import com.elvinlos.langlo.utils.Logger;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
