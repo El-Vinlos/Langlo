@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:layout_width="120dp"
         android:id="@+id/action_deck_spinner"
         android:title="@string/decks"
         app:showAsAction="always"
@@ -11,7 +12,7 @@
         android:id="@+id/action_search"
         android:icon="@drawable/search"
         android:title="@string/search"
-        app:showAsAction="ifRoom|collapseActionView"
+        app:showAsAction="always|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:iconTint="?attr/colorOnPrimary" />
 </menu>
