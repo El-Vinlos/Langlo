@@ -1,7 +1,9 @@
 package com.elvinlos.langlo.ui.main;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.activity.OnBackPressedCallback;
@@ -14,12 +16,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.elvinlos.langlo.Deck;
+import com.elvinlos.langlo.FirebaseHelper;
 import com.elvinlos.langlo.ui.deck.DeckAdapter;
 import com.elvinlos.langlo.R;
+import com.elvinlos.langlo.ui.login.LoginActivity;
 import com.elvinlos.langlo.utils.DrawerHandler;
 import com.elvinlos.langlo.utils.Logger;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONObject;
 
@@ -31,12 +36,13 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MAIN";
     private final List<Deck> deckList = new ArrayList<>();
+    FirebaseUser user;
 
     private DrawerLayout drawerLayout;
     private MaterialToolbar topAppBar;
     private ActionBarDrawerToggle toggle;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +94,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseHelper firebaseHelper = new FirebaseHelper(this);
+        user = firebaseHelper.checkSignIn();
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         getMenuInflater().inflate(R.menu.top_app_bar_home, menu);
@@ -97,6 +112,29 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(android.view.Menu menu) {
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (toggle != null && toggle.onOptionsItemSelected(item)) return true;
+        int id = item.getItemId();
+
+        if (id == R.id.action_account) {
+            handleAccountButtonClick();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void handleAccountButtonClick() {
+        if (user == null){
+            Intent LoginActivity = new Intent(this, LoginActivity.class);
+            startActivity(LoginActivity);
+            return;
+        }
+        // TODO: add user activity
+        Log.d(TAG, "onStart: already signed in");
     }
 
 
@@ -129,9 +167,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (toggle != null && toggle.onOptionsItemSelected(item)) return true;
-        return super.onOptionsItemSelected(item);
-    }
 }
