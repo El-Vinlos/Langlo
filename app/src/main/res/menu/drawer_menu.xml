@@ -3,6 +3,8 @@
     <group android:checkableBehavior="single">
         <item android:id="@+id/nav_home" android:title="@string/home_menu" android:icon="@drawable/home" />
         <item android:id="@+id/nav_card" android:title="@string/card_menu" android:icon="@drawable/card" />
+        <item android:id="@+id/nav_exam" android:title="@string/exam_menu" android:icon="@drawable/exam" />
+        <item android:id="@+id/nav_speak_and_listen" android:title="@string/listen_and_speak_menu" android:icon="@drawable/headphones" />
         <item android:id="@+id/nav_setting" android:title="@string/setting_menu" android:icon="@drawable/setting" />
     </group>
 </menu>

@@ -24,4 +24,6 @@
     <string name="no_categories_available">Không có chủ đề</string>
     <string name="filter_applied">lọc thành công</string>
     <string name="filter_failed">lọc lỗi</string>
+    <string name="exam_menu">Trắc nghiệm</string>
+    <string name="listen_and_speak_menu">Nghe và đọc</string>
 </resources>
