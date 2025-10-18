@@ -1,0 +1,111 @@
+package com.elvinlos.langlo.ui.account;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.CancellationSignal;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.credentials.ClearCredentialStateRequest;
+import androidx.credentials.CredentialManager;
+import androidx.credentials.CredentialManagerCallback;
+import androidx.credentials.exceptions.ClearCredentialException;
+
+import com.elvinlos.langlo.R;
+import com.elvinlos.langlo.ui.main.MainActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.concurrent.Executors;
+
+public class AccountActivity extends AppCompatActivity {
+
+    // Declare UI elements and Firebase components
+    private TextView nameTextView;
+    private Button signOutButton;
+    private FirebaseAuth mAuth;
+    private CredentialManager credentialManager;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_account);
+
+        mAuth = FirebaseAuth.getInstance();
+        credentialManager = CredentialManager.create(this);
+
+
+        nameTextView = findViewById(R.id.nameTextView);
+        signOutButton = findViewById(R.id.signOutButton);
+
+
+        setUserName();
+
+
+        signOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signOut();
+            }
+        });
+    }
+
+    private void setUserName() {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            String userName = currentUser.getDisplayName();
+            if (userName != null && !userName.isEmpty()) {
+                nameTextView.setText(userName);
+            } else {
+                nameTextView.setText("Welcome!");
+            }
+        } else {
+            navigateToLogin();
+            finish();
+        }
+    }
+
+    private void signOut() {
+        // Firebase sign out
+        mAuth.signOut();
+
+        // When a user signs out, clear the current user credential state from all credential providers.
+        ClearCredentialStateRequest clearRequest = new ClearCredentialStateRequest();
+        credentialManager.clearCredentialStateAsync(
+                clearRequest,
+                new CancellationSignal(),
+                Executors.newSingleThreadExecutor(),
+                new CredentialManagerCallback<>() {
+                    @Override
+                    public void onResult(@NonNull Void result) {
+                        navigateToHome();
+                    }
+
+                    @Override
+                    public void onError(@NonNull ClearCredentialException e) {
+                        Log.e("AccountActivity", "Error clearing credential state" + e.getLocalizedMessage());
+                    }
+                });
+    }
+
+    private void navigateToLogin() {
+        Intent intent = new Intent(AccountActivity.this, LoginActivity.class);
+        // Add flags to clear the activity stack and prevent the user from going back to the account screen
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void navigateToHome() {
+        Intent intent = new Intent(AccountActivity.this, MainActivity.class);
+        // Add flags to clear the activity stack and prevent the user from going back to the account screen
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+}

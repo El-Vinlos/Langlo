@@ -3,7 +3,6 @@ package com.elvinlos.langlo.ui.main;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.activity.OnBackPressedCallback;
@@ -19,7 +18,7 @@ import com.elvinlos.langlo.Deck;
 import com.elvinlos.langlo.FirebaseHelper;
 import com.elvinlos.langlo.ui.deck.DeckAdapter;
 import com.elvinlos.langlo.R;
-import com.elvinlos.langlo.ui.login.LoginActivity;
+import com.elvinlos.langlo.ui.account.AccountActivity;
 import com.elvinlos.langlo.utils.DrawerHandler;
 import com.elvinlos.langlo.utils.Logger;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -128,13 +127,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void handleAccountButtonClick() {
-        if (user == null){
-            Intent LoginActivity = new Intent(this, LoginActivity.class);
-            startActivity(LoginActivity);
-            return;
-        }
-        // TODO: add user activity
-        Log.d(TAG, "onStart: already signed in");
+            Intent AccountActivity = new Intent(this, AccountActivity.class);
+            startActivity(AccountActivity);
     }
 
 
