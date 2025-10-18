@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         firebaseHelper.launchSignIn(new FirebaseHelper.SignInListener() {
             @Override
             public void onSignInSuccess() {
-                Navigation.navigateToActivity(LoginActivity.this, AccountActivity.class);
+                Navigation.navigateToActivityWithBackStack(LoginActivity.this, AccountActivity.class);
             }
         });
     }
