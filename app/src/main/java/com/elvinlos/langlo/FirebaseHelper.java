@@ -73,7 +73,6 @@ public class FirebaseHelper {
                     @Override
                     public void onError(GetCredentialException e) {
                         Log.e(TAG, "Sign-in failed: " + e.getLocalizedMessage());
-                        Toast.makeText(activity, "Sign-in failed", Toast.LENGTH_SHORT).show();
                     }
                 }
         );

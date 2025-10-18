@@ -1,7 +1,6 @@
-package com.elvinlos.langlo.ui.login;
+package com.elvinlos.langlo.ui.account;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
