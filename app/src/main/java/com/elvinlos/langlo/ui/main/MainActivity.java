@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.elvinlos.langlo.Deck;
 import com.elvinlos.langlo.FirebaseHelper;
+import com.elvinlos.langlo.ui.account.LoginActivity;
 import com.elvinlos.langlo.ui.deck.DeckAdapter;
 import com.elvinlos.langlo.R;
 import com.elvinlos.langlo.ui.account.AccountActivity;
@@ -127,8 +128,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void handleAccountButtonClick() {
+        if (user == null) {
+            Intent LoginActivity = new Intent(this, LoginActivity.class);
+            startActivity(LoginActivity);
+        } else {
             Intent AccountActivity = new Intent(this, AccountActivity.class);
             startActivity(AccountActivity);
+        }
     }
 
 

@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.elvinlos.langlo.FirebaseHelper;
 import com.elvinlos.langlo.R;
+import com.elvinlos.langlo.utils.Navigation;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
@@ -26,9 +27,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void logIn() {
-        firebaseHelper.launchSignIn();
-        // TODO: add user activity
-        finish();
+        firebaseHelper.launchSignIn(new FirebaseHelper.SignInListener() {
+            @Override
+            public void onSignInSuccess() {
+                Navigation.navigateToActivity(LoginActivity.this, AccountActivity.class);
+            }
+        });
     }
 
     @Override

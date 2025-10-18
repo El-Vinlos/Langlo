@@ -18,7 +18,6 @@ import androidx.credentials.exceptions.ClearCredentialException;
 import androidx.credentials.exceptions.GetCredentialException;
 
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption;
-import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption;
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +34,10 @@ public class FirebaseHelper {
     private final CredentialManager credentialManager;
     private final Activity activity;
 
+    public interface SignInListener {
+        void onSignInSuccess();
+    }
+
     public FirebaseHelper(Activity activity) {
         this.activity = activity;
         this.auth = FirebaseAuth.getInstance();
@@ -44,19 +47,14 @@ public class FirebaseHelper {
     /**
      * Launch Google Sign-In flow using Credential Manager.
      */
-    public void launchSignIn() {
+    public void launchSignIn(SignInListener listener) {
         GetGoogleIdOption googleIdOption = new GetGoogleIdOption.Builder()
                 .setFilterByAuthorizedAccounts(false)
                 .setServerClientId(activity.getString(R.string.default_web_client_id))
                 .build();
 
-        GetSignInWithGoogleOption signInOption = new GetSignInWithGoogleOption.Builder(
-                activity.getString(R.string.default_web_client_id))
-                .setNonce(googleIdOption.getNonce())
-                .build();
-
         GetCredentialRequest request = new GetCredentialRequest.Builder()
-                .addCredentialOption(signInOption)
+                .addCredentialOption(googleIdOption)
                 .build();
 
         credentialManager.getCredentialAsync(
@@ -67,7 +65,7 @@ public class FirebaseHelper {
                 new CredentialManagerCallback<>() {
                     @Override
                     public void onResult(GetCredentialResponse result) {
-                        handleCredential(result.getCredential());
+                        handleCredential(result.getCredential(), listener);
                     }
 
                     @Override
@@ -81,12 +79,12 @@ public class FirebaseHelper {
     /**
      * Handles the returned Google credential.
      */
-    private void handleCredential(Credential credential) {
+    private void handleCredential(Credential credential, SignInListener listener) {
         if (credential instanceof CustomCredential customCredential
                 && credential.getType().equals(GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL)) {
             Bundle data = customCredential.getData();
             GoogleIdTokenCredential googleIdTokenCredential = GoogleIdTokenCredential.createFrom(data);
-            firebaseAuthWithGoogle(googleIdTokenCredential.getIdToken());
+            firebaseAuthWithGoogle(googleIdTokenCredential.getIdToken(), listener);
         } else {
             Log.w(TAG, "Unexpected credential type");
         }
@@ -95,7 +93,7 @@ public class FirebaseHelper {
     /**
      * Authenticate Firebase with Google ID token.
      */
-    private void firebaseAuthWithGoogle(String idToken) {
+    private void firebaseAuthWithGoogle(String idToken, SignInListener listener) {
         AuthCredential firebaseCredential = GoogleAuthProvider.getCredential(idToken, null);
         auth.signInWithCredential(firebaseCredential)
                 .addOnCompleteListener(activity, task -> {
@@ -104,6 +102,7 @@ public class FirebaseHelper {
                         Log.d(TAG, "signInWithCredential:success");
                         assert user != null;
                         Toast.makeText(activity, "Welcome, " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
+                        listener.onSignInSuccess();
                     } else {
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
                         Toast.makeText(activity, "Sign-in failed", Toast.LENGTH_SHORT).show();

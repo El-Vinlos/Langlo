@@ -1,5 +1,6 @@
 package com.elvinlos.langlo.ui.account;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CancellationSignal;
@@ -18,6 +19,7 @@ import androidx.credentials.exceptions.ClearCredentialException;
 
 import com.elvinlos.langlo.R;
 import com.elvinlos.langlo.ui.main.MainActivity;
+import com.elvinlos.langlo.utils.Navigation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -63,9 +65,10 @@ public class AccountActivity extends AppCompatActivity {
                 nameTextView.setText(userName);
             } else {
                 nameTextView.setText("Welcome!");
+                Navigation.navigateToActivity(AccountActivity.this, MainActivity.class);
             }
         } else {
-            navigateToLogin();
+            Navigation.navigateToActivity(AccountActivity.this, LoginActivity.class);
             finish();
         }
     }
@@ -82,9 +85,7 @@ public class AccountActivity extends AppCompatActivity {
                 Executors.newSingleThreadExecutor(),
                 new CredentialManagerCallback<>() {
                     @Override
-                    public void onResult(@NonNull Void result) {
-                        navigateToHome();
-                    }
+                    public void onResult(@NonNull Void result) { Navigation.navigateToActivity(AccountActivity.this, MainActivity.class); }
 
                     @Override
                     public void onError(@NonNull ClearCredentialException e) {
@@ -93,19 +94,5 @@ public class AccountActivity extends AppCompatActivity {
                 });
     }
 
-    private void navigateToLogin() {
-        Intent intent = new Intent(AccountActivity.this, LoginActivity.class);
-        // Add flags to clear the activity stack and prevent the user from going back to the account screen
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
-    }
 
-    private void navigateToHome() {
-        Intent intent = new Intent(AccountActivity.this, MainActivity.class);
-        // Add flags to clear the activity stack and prevent the user from going back to the account screen
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
-    }
 }
