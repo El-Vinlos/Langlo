@@ -34,7 +34,7 @@
                 android:id="@+id/scoreText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Score: 0%"
+                android:text="@string/pronounciation_top_score"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="?attr/colorOnPrimary"
@@ -58,7 +58,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Say this word:"
+                        android:text="@string/top_instruct"
                         android:textSize="16sp"
                         android:textColor="?attr/colorOnSurface"
                         android:layout_marginBottom="16dp" />
@@ -67,7 +67,7 @@
                         android:id="@+id/wordToSpeak"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hello"
+                        android:text="@string/pronunciation_placeholder"
                         android:textSize="48sp"
                         android:textStyle="bold"
                         android:textColor="?attr/colorOnPrimary" />
@@ -78,7 +78,7 @@
                 android:id="@+id/instructionText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tap the microphone and say the word above"
+                android:text="@string/bottom_instruct"
                 android:textSize="16sp"
                 android:textColor="?attr/colorOnPrimary"
                 android:gravity="center"
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 app:icon="@drawable/ic_microphone"
-                android:text="Start Recording"
+                android:text="@string/btn_record_txt"
                 android:textSize="18sp"
                 android:paddingStart="32dp"
                 android:paddingEnd="32dp"
@@ -126,7 +126,7 @@
                         android:id="@+id/resultText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Result will appear here"
+                        android:text="@string/result_txt_pronounce"
                         android:textSize="16sp"
                         android:gravity="center" />
                 </LinearLayout>
@@ -137,7 +137,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Next Word →"
+                android:text="@string/retry_button_txt"
                 android:textSize="16sp"
                 android:visibility="gone"
                 app:cornerRadius="24dp"

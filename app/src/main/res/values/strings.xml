@@ -40,7 +40,7 @@
     <string name="btn_retry_text">Thử lại</string>
     <string name="recording_intruct">Đang thu âm</string>
     <string name="best_score_scoretext">Điểm cao nhất: </string>
-    <string name="attempts_score_text">Lần thử\n</string>
+    <string name="attempts_score_text">Lần thử </string>
     <string name="audio_recording_error">Audio recording error</string>
     <string name="client_side_error">Client side error</string>
     <string name="insufficient_permissions">Insufficient permissions</string>
@@ -54,4 +54,11 @@
     <string name="permission_granted_toast">Cho phép thành công</string>
     <string name="ask_mic_perm_toast">Xin hãy cắp quyền microphone</string>
     <string name="mic_permission_denied">Quyền microphone bị tử chối</string>
+    <string name="pronounciation_top_score">Score: 0%</string>
+    <string name="top_instruct">"Đọc từ này: "</string>
+    <string name="pronunciation_placeholder">Hello</string>
+    <string name="bottom_instruct">Tap the microphone and say the word above</string>
+    <string name="btn_record_txt">Bắt đầu thu âm</string>
+    <string name="result_txt_pronounce">Result will appear here</string>
+    <string name="retry_button_txt">retry</string>
 </resources>
