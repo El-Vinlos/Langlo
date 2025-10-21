@@ -23,7 +23,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 android:theme="@style/ThemeOverlay.Material3.ActionBar"
-                app:title="@string/app_name"
+                app:title="Pronunciation"
                 app:titleTextColor="?attr/colorOnPrimary"
                 app:titleCentered="true"
                 app:navigationIcon="@drawable/list"

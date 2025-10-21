@@ -177,7 +177,7 @@ public class PronunciationTestActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
                 startButton.setEnabled(true);
                 String errorMessage = getErrorMessage(error);
-                instructionText.setText(getString(R.string.error) + errorMessage);
+                instructionText.setText(getString(R.string.fail_intructions, errorMessage));
                 Toast.makeText(PronunciationTestActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
             }
 
@@ -309,10 +309,7 @@ public class PronunciationTestActivity extends AppCompatActivity {
 
     private void updateScore() {
         int percentage = Math.round(bestScore);
-        scoreText.setText(getString(R.string.best_score_scoretext)
-                + percentage + "% ( "
-                + getString(R.string.attempts_score_text)
-                + attemptCount + " )");
+        scoreText.setText(getString(R.string.best_score_format, percentage, attemptCount));
     }
 
     private void uploadScoreForUser(String word, int score) {

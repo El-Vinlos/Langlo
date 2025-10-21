@@ -95,6 +95,7 @@ public class SpeakActivity extends AppCompatActivity {
         speechItems.add(new SpeechItem("Temperature", 0));
         speechItems.add(new SpeechItem("Comfortable", 0));
         speechItems.add(new SpeechItem("Vegetable", 0));
+        speechItems.add(new SpeechItem("Literally", 0));
         speechItems.add(new SpeechItem("Necessary", 0));
         speechItems.add(new SpeechItem("Particularly", 0));
 
