@@ -40,7 +40,6 @@ public class SpeakActivity extends AppCompatActivity {
                 if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                     drawerLayout.closeDrawer(GravityCompat.START);
                 } else {
-                    // If you want to call the default behavior, you need to disable this callback and re-dispatch the event.
                     setEnabled(false);
                     getOnBackPressedDispatcher().onBackPressed();
                 }
