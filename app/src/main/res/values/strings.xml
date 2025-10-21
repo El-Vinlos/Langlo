@@ -36,11 +36,9 @@
     <string name="wait_for_mic_perm">đợi cho phép microphone</string>
     <string name="pronounce_intruction">Phát âm đi</string>
     <string name="comparing_result_str">Đang so sánh....</string>
-    <string name="error">"Lỗi: "</string>
+    <string name="fail_intructions">Lỗi: %1$s</string>
     <string name="btn_retry_text">Thử lại</string>
     <string name="recording_intruct">Đang thu âm</string>
-    <string name="best_score_scoretext">Điểm cao nhất: </string>
-    <string name="attempts_score_text">Lần thử </string>
     <string name="audio_recording_error">Audio recording error</string>
     <string name="client_side_error">Client side error</string>
     <string name="insufficient_permissions">Insufficient permissions</string>
@@ -61,4 +59,5 @@
     <string name="btn_record_txt">Bắt đầu thu âm</string>
     <string name="result_txt_pronounce">Result will appear here</string>
     <string name="retry_button_txt">retry</string>
+    <string name="best_score_format">Best Score: %1$d%%  (Attempts: %2$d)</string>
 </resources>
