@@ -41,7 +41,6 @@
                 android:gravity="center"
                 android:layout_marginBottom="24dp" />
 
-            <!-- Word Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -85,7 +84,6 @@
                 android:gravity="center"
                 android:layout_marginBottom="24dp" />
 
-            <!-- Progress Bar -->
             <ProgressBar
                 android:id="@+id/progressBar"
                 android:layout_width="wrap_content"
@@ -94,7 +92,6 @@
                 android:visibility="gone"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Start Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/startButton"
                 android:layout_width="wrap_content"
@@ -110,7 +107,6 @@
                 app:cornerRadius="28dp"
                 android:layout_marginBottom="24dp" />
 
-            <!-- Result Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/resultCard"
                 android:layout_width="match_parent"
@@ -136,9 +132,8 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Next Button -->
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/nextButton"
+                android:id="@+id/retry_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
