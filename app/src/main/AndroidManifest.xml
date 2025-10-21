@@ -36,6 +36,14 @@
 
         <activity android:name=".ui.account.AccountActivity"
             android:exported="false"/>
+
+        <activity android:name=".ui.speech.SpeakActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".ui.speech.PronunciationTestActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.speech.SpeakActivity" />
     </application>
 
 </manifest>

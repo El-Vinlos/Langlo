@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.elvinlos.langlo.ui.deck.DeckActivity;
 import com.elvinlos.langlo.ui.main.MainActivity;
 import com.elvinlos.langlo.R;
+import com.elvinlos.langlo.ui.speech.SpeakActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 
 public class DrawerHandler {
@@ -44,9 +45,15 @@ public class DrawerHandler {
                 topAppBar.getMenu().clear();
                 topAppBar.inflateMenu(R.menu.top_app_bar_deck);
             }
-
         } else if (id == R.id.nav_setting) {
             //TODO : ADD SETTING
+        } else if (id == R.id.nav_speak_and_listen) {
+            if (!(activity instanceof SpeakActivity)) {
+                activity.startActivity(new Intent(activity, SpeakActivity.class));
+                activity.finish();
+                topAppBar.getMenu().clear();
+                topAppBar.inflateMenu(R.menu.top_app_bar_deck);
+            }
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
