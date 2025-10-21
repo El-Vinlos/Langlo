@@ -18,11 +18,14 @@ import androidx.credentials.exceptions.ClearCredentialException;
 import androidx.credentials.exceptions.GetCredentialException;
 
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption;
+import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption;
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.Executors;
 
@@ -33,6 +36,8 @@ public class FirebaseHelper {
     private final FirebaseAuth auth;
     private final CredentialManager credentialManager;
     private final Activity activity;
+
+
 
     public interface SignInListener {
         void onSignInSuccess();
@@ -48,13 +53,15 @@ public class FirebaseHelper {
      * Launch Google Sign-In flow using Credential Manager.
      */
     public void launchSignIn(SignInListener listener) {
-        GetGoogleIdOption googleIdOption = new GetGoogleIdOption.Builder()
-                .setFilterByAuthorizedAccounts(false)
-                .setServerClientId(activity.getString(R.string.default_web_client_id))
-                .build();
 
+        GetSignInWithGoogleOption signInOption = new GetSignInWithGoogleOption.Builder(
+
+                activity.getString(R.string.default_web_client_id)
+        ).build();
+
+        // Create the Credential Manager request
         GetCredentialRequest request = new GetCredentialRequest.Builder()
-                .addCredentialOption(googleIdOption)
+                .addCredentialOption(signInOption)
                 .build();
 
         credentialManager.getCredentialAsync(
