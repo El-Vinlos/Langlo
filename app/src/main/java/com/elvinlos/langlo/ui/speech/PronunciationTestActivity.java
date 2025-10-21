@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -20,8 +21,14 @@ import androidx.core.content.ContextCompat;
 import com.elvinlos.langlo.R;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.card.MaterialCardView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class PronunciationTestActivity extends AppCompatActivity {
 
@@ -42,6 +49,10 @@ public class PronunciationTestActivity extends AppCompatActivity {
     private float bestScore = 0f;
     private int attemptCount = 0;
 
+    // Firebase
+    private FirebaseAuth mAuth;
+    private DatabaseReference usersRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +60,10 @@ public class PronunciationTestActivity extends AppCompatActivity {
 
         initViews();
         setupToolbar();
+
+        // ✅ Firebase init
+        mAuth = FirebaseAuth.getInstance();
+        usersRef = FirebaseDatabase.getInstance().getReference("users");
 
         // Get word from intent or use default
         currentWord = getIntent().getStringExtra("WORD_TO_TEST");
@@ -64,7 +79,6 @@ public class PronunciationTestActivity extends AppCompatActivity {
 
     private void requestAudioPermission() {
         if (!hasAudioPermission()) {
-            // Show rationale if needed
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO)) {
                 new androidx.appcompat.app.AlertDialog.Builder(this)
                         .setTitle("Microphone Permission Required")
@@ -78,13 +92,13 @@ public class PronunciationTestActivity extends AppCompatActivity {
                         })
                         .show();
             } else {
-                // First time - directly request permission
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.RECORD_AUDIO},
                         REQUEST_RECORD_AUDIO);
             }
         }
     }
+
     private void initViews() {
         toolbar = findViewById(R.id.toolbar);
         wordToSpeakText = findViewById(R.id.wordToSpeak);
@@ -150,10 +164,8 @@ public class PronunciationTestActivity extends AppCompatActivity {
 
             @Override
             public void onRmsChanged(float rmsdB) {}
-
             @Override
             public void onBufferReceived(byte[] buffer) {}
-
             @Override
             public void onEndOfSpeech() {
                 progressBar.setVisibility(View.GONE);
@@ -185,11 +197,8 @@ public class PronunciationTestActivity extends AppCompatActivity {
                 }
             }
 
-            @Override
-            public void onPartialResults(Bundle partialResults) {}
-
-            @Override
-            public void onEvent(int eventType, Bundle params) {}
+            @Override public void onPartialResults(Bundle partialResults) {}
+            @Override public void onEvent(int eventType, Bundle params) {}
         });
     }
 
@@ -219,7 +228,7 @@ public class PronunciationTestActivity extends AppCompatActivity {
         boolean isExactMatch = spokenWord.trim().equalsIgnoreCase(currentWord.trim());
 
         if (isExactMatch) {
-            pronunciationScore = confidence * 100f; // Convert to percentage
+            pronunciationScore = confidence * 100f;
         } else {
             pronunciationScore = calculateSimilarity(currentWord, spokenWord) * confidence * 100f;
         }
@@ -259,6 +268,8 @@ public class PronunciationTestActivity extends AppCompatActivity {
                 percentage >= 70 ? "Good job! Try again for better score." :
                         "Keep practicing!";
         instructionText.setText(instruction);
+
+        uploadScoreForUser(currentWord, percentage);
     }
 
     private void retryPronunciation() {
@@ -266,7 +277,6 @@ public class PronunciationTestActivity extends AppCompatActivity {
         btn_retry.setVisibility(View.GONE);
         startButton.setVisibility(View.VISIBLE);
         instructionText.setText(R.string.recording_intruct);
-
         startListening();
     }
 
@@ -274,7 +284,6 @@ public class PronunciationTestActivity extends AppCompatActivity {
         target = target.toLowerCase();
         spoken = spoken.toLowerCase();
 
-        // Sự dụng thuật toán Levenshtein
         int maxLen = Math.max(target.length(), spoken.length());
         if (maxLen == 0) return 1.0f;
 
@@ -284,27 +293,48 @@ public class PronunciationTestActivity extends AppCompatActivity {
 
     private int levenshteinDistance(String s1, String s2) {
         int[][] dp = new int[s1.length() + 1][s2.length() + 1];
-
         for (int i = 0; i <= s1.length(); i++) dp[i][0] = i;
         for (int j = 0; j <= s2.length(); j++) dp[0][j] = j;
-
         for (int i = 1; i <= s1.length(); i++) {
             for (int j = 1; j <= s2.length(); j++) {
                 int cost = (s1.charAt(i - 1) == s2.charAt(j - 1)) ? 0 : 1;
                 dp[i][j] = Math.min(Math.min(
                                 dp[i - 1][j] + 1,
                                 dp[i][j - 1] + 1),
-                        dp[i - 1][j - 1] + cost
-                );
+                        dp[i - 1][j - 1] + cost);
             }
         }
-
         return dp[s1.length()][s2.length()];
     }
 
     private void updateScore() {
         int percentage = Math.round(bestScore);
-        scoreText.setText(getString(R.string.best_score_scoretext) + percentage + "% ( " + getString(R.string.attempts_score_text) + attemptCount + " )");
+        scoreText.setText(getString(R.string.best_score_scoretext)
+                + percentage + "% ( "
+                + getString(R.string.attempts_score_text)
+                + attemptCount + " )");
+    }
+
+    private void uploadScoreForUser(String word, int score) {
+        if (mAuth.getCurrentUser() == null) {
+            Toast.makeText(this, "User not logged in.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String uid = mAuth.getCurrentUser().getUid();
+
+        Map<String, Object> scoreData = new HashMap<>();
+        scoreData.put("score", score);
+        scoreData.put("timestamp", System.currentTimeMillis());
+
+        usersRef.child(uid)
+                .child("scores")
+                .child(word)
+                .setValue(scoreData)
+                .addOnSuccessListener(aVoid ->
+                        Toast.makeText(this, "Score uploaded for " + word, Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Failed to upload score: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
     private String getErrorMessage(int error) {
