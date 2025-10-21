@@ -26,4 +26,6 @@
     <string name="filter_failed">lọc lỗi</string>
     <string name="exam_menu">Trắc nghiệm</string>
     <string name="listen_and_speak_menu">Nghe và đọc</string>
+    <string name="score">Confidence: 0%</string>
+    <string name="pronounce_text">Recognized Speech</string>
 </resources>
