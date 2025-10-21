@@ -70,7 +70,7 @@
                         android:text="Hello"
                         android:textSize="48sp"
                         android:textStyle="bold"
-                        android:textColor="?attr/colorPrimary" />
+                        android:textColor="?attr/colorOnPrimary" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
