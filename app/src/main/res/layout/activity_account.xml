@@ -22,10 +22,6 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <!-- Header Background -->
-
-        <!-- Profile Card -->
-
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/profileCard"
             android:layout_width="0dp"
@@ -124,18 +120,12 @@
                     android:orientation="horizontal"
                     android:padding="16dp">
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@android:drawable/ic_menu_edit"
-                        app:tint="?attr/colorPrimary" />
-
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Edit Profile"
+                        android:text="Hiển thị điểm"
                         android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp" />
 
@@ -171,18 +161,12 @@
                     android:orientation="horizontal"
                     android:padding="16dp">
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@android:drawable/ic_menu_preferences"
-                        app:tint="?attr/colorPrimary" />
-
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Settings"
+                        android:text="Cài đặt"
                         android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp" />
 
