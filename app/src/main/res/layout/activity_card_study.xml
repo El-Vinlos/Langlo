@@ -24,43 +24,43 @@
             android:id="@+id/textCard_en"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/Question"
             android:textColor="?attr/colorOnPrimary"
             android:textSize="28sp"
             android:textStyle="bold"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/textCard_vn"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/textCard_vn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:alpha="0"
+            android:gravity="center"
             android:text="@string/Answer"
             android:textColor="?attr/colorOnPrimary"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:gravity="center"
-            android:alpha="0"
-            app:layout_constraintTop_toBottomOf="@id/textCard_en"
             app:layout_constraintBottom_toTopOf="@+id/buttonContainer"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textCard_en"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <LinearLayout
             android:id="@+id/buttonContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
             android:layout_marginBottom="32dp"
+            android:gravity="center"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnPlayAudio"
@@ -68,12 +68,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/speaker"
                 android:textColor="?attr/colorOnSecondary"
+                android:visibility="gone"
                 app:backgroundTint="?attr/colorSecondary"
                 app:cornerRadius="10dp"
                 app:icon="@drawable/speaker"
                 app:iconGravity="start"
-                app:iconPadding="8dp"
-                android:visibility="gone" />
+                app:iconPadding="8dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAction"
