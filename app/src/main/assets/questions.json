@@ -1,0 +1,904 @@
+{
+  "questions": [
+    {
+      "questionId": "q1",
+      "question": "Thủ đô của Việt Nam là gì?",
+      "optionA": "Hà Nội",
+      "optionB": "Hồ Chí Minh",
+      "optionC": "Đà Nẵng",
+      "optionD": "Huế",
+      "correctAnswer": "A"
+    },
+    {
+      "questionId": "q2",
+      "question": "2 + 2 = ?",
+      "optionA": "3",
+      "optionB": "4",
+      "optionC": "5",
+      "optionD": "6",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q3",
+      "question": "Đại dương lớn nhất thế giới là gì?",
+      "optionA": "Đại Tây Dương",
+      "optionB": "Ấn Độ Dương",
+      "optionC": "Thái Bình Dương",
+      "optionD": "Bắc Băng Dương",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q4",
+      "question": "Ngôn ngữ lập trình nào được sử dụng để phát triển Android?",
+      "optionA": "Python",
+      "optionB": "Java",
+      "optionC": "C++",
+      "optionD": "Ruby",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q5",
+      "question": "Hành tinh nào gần Mặt Trời nhất?",
+      "optionA": "Trái Đất",
+      "optionB": "Sao Kim",
+      "optionC": "Sao Thủy",
+      "optionD": "Sao Hỏa",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q6",
+      "question": "Năm nào Việt Nam thống nhất đất nước?",
+      "optionA": "1973",
+      "optionB": "1975",
+      "optionC": "1976",
+      "optionD": "1980",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q7",
+      "question": "Quốc gia nào có diện tích lớn nhất thế giới?",
+      "optionA": "Canada",
+      "optionB": "Trung Quốc",
+      "optionC": "Nga",
+      "optionD": "Mỹ",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q8",
+      "question": "Ai là người phát minh ra bóng đèn điện?",
+      "optionA": "Nikola Tesla",
+      "optionB": "Thomas Edison",
+      "optionC": "Alexander Bell",
+      "optionD": "Albert Einstein",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q9",
+      "question": "Ngôn ngữ nào được sử dụng nhiều nhất trên thế giới?",
+      "optionA": "Tiếng Anh",
+      "optionB": "Tiếng Tây Ban Nha",
+      "optionC": "Tiếng Trung",
+      "optionD": "Tiếng Hindi",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q10",
+      "question": "Công thức hóa học của nước là gì?",
+      "optionA": "H2O",
+      "optionB": "CO2",
+      "optionC": "O2",
+      "optionD": "H2SO4",
+      "correctAnswer": "A"
+    },
+    {
+      "questionId": "q11",
+      "question": "Núi cao nhất thế giới là gì?",
+      "optionA": "K2",
+      "optionB": "Everest",
+      "optionC": "Kangchenjunga",
+      "optionD": "Makalu",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q12",
+      "question": "Bao nhiêu châu lục trên Trái Đất?",
+      "optionA": "5",
+      "optionB": "6",
+      "optionC": "7",
+      "optionD": "8",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q13",
+      "question": "Đơn vị tiền tệ của Nhật Bản là gì?",
+      "optionA": "Won",
+      "optionB": "Yuan",
+      "optionC": "Yen",
+      "optionD": "Baht",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q14",
+      "question": "Kim tự tháp nổi tiếng nằm ở quốc gia nào?",
+      "optionA": "Hy Lạp",
+      "optionB": "Mexico",
+      "optionC": "Ai Cập",
+      "optionD": "Ấn Độ",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q15",
+      "question": "Tốc độ ánh sáng là bao nhiêu?",
+      "optionA": "300,000 km/s",
+      "optionB": "150,000 km/s",
+      "optionC": "500,000 km/s",
+      "optionD": "200,000 km/s",
+      "correctAnswer": "A"
+    },
+    {
+      "questionId": "q16",
+      "question": "Bộ phim nào giành Oscar cho phim hay nhất năm 2020?",
+      "optionA": "1917",
+      "optionB": "Joker",
+      "optionC": "Parasite",
+      "optionD": "Once Upon a Time",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q17",
+      "question": "Động vật nào là biểu tượng của World Wide Fund (WWF)?",
+      "optionA": "Hổ",
+      "optionB": "Gấu trúc",
+      "optionC": "Voi",
+      "optionD": "Sư tử",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q18",
+      "question": "HTML là viết tắt của gì?",
+      "optionA": "Hyper Text Markup Language",
+      "optionB": "High Tech Modern Language",
+      "optionC": "Home Tool Markup Language",
+      "optionD": "Hyperlinks Text Mark Language",
+      "correctAnswer": "A"
+    },
+    {
+      "questionId": "q19",
+      "question": "Trái Đất quay quanh Mặt Trời mất bao lâu?",
+      "optionA": "365 ngày",
+      "optionB": "360 ngày",
+      "optionC": "400 ngày",
+      "optionD": "350 ngày",
+      "correctAnswer": "A"
+    },
+    {
+      "questionId": "q20",
+      "question": "Thủ đô của Pháp là gì?",
+      "optionA": "London",
+      "optionB": "Berlin",
+      "optionC": "Paris",
+      "optionD": "Madrid",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q21",
+      "question": "Ai là tác giả của 'Romeo và Juliet'?",
+      "optionA": "Charles Dickens",
+      "optionB": "William Shakespeare",
+      "optionC": "Mark Twain",
+      "optionD": "Jane Austen",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q22",
+      "question": "Số nguyên tố đầu tiên là gì?",
+      "optionA": "0",
+      "optionB": "1",
+      "optionC": "2",
+      "optionD": "3",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q23",
+      "question": "Bao nhiêu phút trong một giờ?",
+      "optionA": "50",
+      "optionB": "60",
+      "optionC": "100",
+      "optionD": "120",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q24",
+      "question": "Quốc gia nào tổ chức World Cup 2018?",
+      "optionA": "Brazil",
+      "optionB": "Đức",
+      "optionC": "Nga",
+      "optionD": "Qatar",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q25",
+      "question": "CPU là viết tắt của gì?",
+      "optionA": "Central Processing Unit",
+      "optionB": "Computer Personal Unit",
+      "optionC": "Central Program Utility",
+      "optionD": "Central Processor Utility",
+      "correctAnswer": "A"
+    },
+    {
+      "questionId": "q26",
+      "question": "Biển nào sâu nhất thế giới?",
+      "optionA": "Biển Đỏ",
+      "optionB": "Biển Chết",
+      "optionC": "Hào Mariana",
+      "optionD": "Biển Địa Trung Hải",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q27",
+      "question": "Điện thoại được phát minh bởi ai?",
+      "optionA": "Alexander Graham Bell",
+      "optionB": "Thomas Edison",
+      "optionC": "Nikola Tesla",
+      "optionD": "Steve Jobs",
+      "correctAnswer": "A"
+    },
+    {
+      "questionId": "q28",
+      "question": "Quốc kỳ nào có màu đỏ và vàng sao?",
+      "optionA": "Trung Quốc",
+      "optionB": "Việt Nam",
+      "optionC": "Nhật Bản",
+      "optionD": "Hàn Quốc",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q29",
+      "question": "Bao nhiêu cạnh trong hình lục giác?",
+      "optionA": "4",
+      "optionB": "5",
+      "optionC": "6",
+      "optionD": "8",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q30",
+      "question": "Amazon là tên của cái gì?",
+      "optionA": "Sa mạc",
+      "optionB": "Núi",
+      "optionC": "Sông",
+      "optionD": "Hồ",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q31",
+      "question": "Thủ đô của Úc là gì?",
+      "optionA": "Sydney",
+      "optionB": "Melbourne",
+      "optionC": "Canberra",
+      "optionD": "Brisbane",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q32",
+      "question": "Ai vẽ bức tranh Mona Lisa?",
+      "optionA": "Picasso",
+      "optionB": "Van Gogh",
+      "optionC": "Leonardo da Vinci",
+      "optionD": "Michelangelo",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q33",
+      "question": "Bao nhiêu giờ trong một ngày?",
+      "optionA": "12",
+      "optionB": "20",
+      "optionC": "24",
+      "optionD": "30",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q34",
+      "question": "Thủ đô của Thái Lan là gì?",
+      "optionA": "Phuket",
+      "optionB": "Bangkok",
+      "optionC": "Chiang Mai",
+      "optionD": "Pattaya",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q35",
+      "question": "Google được thành lập năm nào?",
+      "optionA": "1996",
+      "optionB": "1998",
+      "optionC": "2000",
+      "optionD": "2002",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q36",
+      "question": "Quốc gia nào có hình dạng giống chiếc ủng?",
+      "optionA": "Pháp",
+      "optionB": "Ý",
+      "optionC": "Tây Ban Nha",
+      "optionD": "Hy Lạp",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q37",
+      "question": "Động vật nhanh nhất trên cạn là gì?",
+      "optionA": "Sư tử",
+      "optionB": "Báo gêpa",
+      "optionC": "Ngựa vằn",
+      "optionD": "Linh dương",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q38",
+      "question": "Facebook được thành lập bởi ai?",
+      "optionA": "Bill Gates",
+      "optionB": "Steve Jobs",
+      "optionC": "Mark Zuckerberg",
+      "optionD": "Elon Musk",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q39",
+      "question": "Bao nhiêu ngày trong tháng 2 năm nhuận?",
+      "optionA": "28",
+      "optionB": "29",
+      "optionC": "30",
+      "optionD": "31",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q40",
+      "question": "Thủ đô của Nhật Bản là gì?",
+      "optionA": "Osaka",
+      "optionB": "Kyoto",
+      "optionC": "Tokyo",
+      "optionD": "Nagoya",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q41",
+      "question": "Trái Đất có bao nhiêu mặt trăng?",
+      "optionA": "0",
+      "optionB": "1",
+      "optionC": "2",
+      "optionD": "3",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q42",
+      "question": "Olympic được tổ chức mấy năm một lần?",
+      "optionA": "2 năm",
+      "optionB": "3 năm",
+      "optionC": "4 năm",
+      "optionD": "5 năm",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q43",
+      "question": "Bao nhiêu cung hoàng đạo trong chiêm tinh học?",
+      "optionA": "10",
+      "optionB": "12",
+      "optionC": "14",
+      "optionD": "16",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q44",
+      "question": "Microsoft được thành lập bởi ai?",
+      "optionA": "Steve Jobs",
+      "optionB": "Bill Gates",
+      "optionC": "Mark Zuckerberg",
+      "optionD": "Larry Page",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q45",
+      "question": "Thủ đô của Hàn Quốc là gì?",
+      "optionA": "Busan",
+      "optionB": "Incheon",
+      "optionC": "Seoul",
+      "optionD": "Daegu",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q46",
+      "question": "Ai phát minh ra máy bay?",
+      "optionA": "Henry Ford",
+      "optionB": "Anh em nhà Wright",
+      "optionC": "Thomas Edison",
+      "optionD": "Leonardo da Vinci",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q47",
+      "question": "Bao nhiêu màu trong cầu vồng?",
+      "optionA": "5",
+      "optionB": "6",
+      "optionC": "7",
+      "optionD": "8",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q48",
+      "question": "Quốc gia nào có dân số đông nhất thế giới?",
+      "optionA": "Ấn Độ",
+      "optionB": "Trung Quốc",
+      "optionC": "Mỹ",
+      "optionD": "Indonesia",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q49",
+      "question": "Thủ đô của Đức là gì?",
+      "optionA": "Munich",
+      "optionB": "Hamburg",
+      "optionC": "Berlin",
+      "optionD": "Frankfurt",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q50",
+      "question": "Bao nhiêu chân trong con nhện?",
+      "optionA": "6",
+      "optionB": "8",
+      "optionC": "10",
+      "optionD": "12",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q51",
+      "question": "Netflix được thành lập năm nào?",
+      "optionA": "1995",
+      "optionB": "1997",
+      "optionC": "2000",
+      "optionD": "2005",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q52",
+      "question": "Thủ đô của Canada là gì?",
+      "optionA": "Toronto",
+      "optionB": "Vancouver",
+      "optionC": "Montreal",
+      "optionD": "Ottawa",
+      "correctAnswer": "D"
+    },
+    {
+      "questionId": "q53",
+      "question": "Ai viết Harry Potter?",
+      "optionA": "J.R.R. Tolkien",
+      "optionB": "J.K. Rowling",
+      "optionC": "Stephen King",
+      "optionD": "George R.R. Martin",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q54",
+      "question": "Bao nhiêu thành viên trong nhóm Beatles?",
+      "optionA": "3",
+      "optionB": "4",
+      "optionC": "5",
+      "optionD": "6",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q55",
+      "question": "iPhone được ra mắt lần đầu năm nào?",
+      "optionA": "2005",
+      "optionB": "2007",
+      "optionC": "2009",
+      "optionD": "2010",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q56",
+      "question": "Thủ đô của Ý là gì?",
+      "optionA": "Milan",
+      "optionB": "Venice",
+      "optionC": "Rome",
+      "optionD": "Florence",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q57",
+      "question": "Bao nhiêu người trong một đội bóng đá?",
+      "optionA": "9",
+      "optionB": "10",
+      "optionC": "11",
+      "optionD": "12",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q58",
+      "question": "Tượng Nữ Thần Tự Do ở quốc gia nào?",
+      "optionA": "Pháp",
+      "optionB": "Anh",
+      "optionC": "Mỹ",
+      "optionD": "Canada",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q59",
+      "question": "Bao nhiêu răng người trưởng thành?",
+      "optionA": "28",
+      "optionB": "30",
+      "optionC": "32",
+      "optionD": "34",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q60",
+      "question": "Thủ đô của Tây Ban Nha là gì?",
+      "optionA": "Barcelona",
+      "optionB": "Madrid",
+      "optionC": "Valencia",
+      "optionD": "Seville",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q61",
+      "question": "Tesla được thành lập bởi ai?",
+      "optionA": "Bill Gates",
+      "optionB": "Jeff Bezos",
+      "optionC": "Elon Musk",
+      "optionD": "Mark Zuckerberg",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q62",
+      "question": "Bao nhiêu ngón tay trên 2 bàn tay?",
+      "optionA": "8",
+      "optionB": "10",
+      "optionC": "12",
+      "optionD": "14",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q63",
+      "question": "Chiến tranh thế giới thứ 2 kết thúc năm nào?",
+      "optionA": "1943",
+      "optionB": "1944",
+      "optionC": "1945",
+      "optionD": "1946",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q64",
+      "question": "Thủ đô của Ai Cập là gì?",
+      "optionA": "Alexandria",
+      "optionB": "Cairo",
+      "optionC": "Giza",
+      "optionD": "Luxor",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q65",
+      "question": "Bao nhiêu nốt nhạc trong âm giai?",
+      "optionA": "5",
+      "optionB": "6",
+      "optionC": "7",
+      "optionD": "8",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q66",
+      "question": "YouTube được thành lập năm nào?",
+      "optionA": "2003",
+      "optionB": "2005",
+      "optionC": "2007",
+      "optionD": "2009",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q67",
+      "question": "Thủ đô của Nga là gì?",
+      "optionA": "St. Petersburg",
+      "optionB": "Moscow",
+      "optionC": "Kiev",
+      "optionD": "Minsk",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q68",
+      "question": "Bao nhiêu kỳ quan thế giới cổ đại?",
+      "optionA": "5",
+      "optionB": "7",
+      "optionC": "9",
+      "optionD": "10",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q69",
+      "question": "WhatsApp được thành lập năm nào?",
+      "optionA": "2007",
+      "optionB": "2009",
+      "optionC": "2011",
+      "optionD": "2013",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q70",
+      "question": "Thủ đô của Thụy Sĩ là gì?",
+      "optionA": "Zurich",
+      "optionB": "Geneva",
+      "optionC": "Bern",
+      "optionD": "Basel",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q71",
+      "question": "Bao nhiêu giây trong một phút?",
+      "optionA": "50",
+      "optionB": "60",
+      "optionC": "100",
+      "optionD": "120",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q72",
+      "question": "Twitter được thành lập năm nào?",
+      "optionA": "2004",
+      "optionB": "2006",
+      "optionC": "2008",
+      "optionD": "2010",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q73",
+      "question": "Thủ đô của Hà Lan là gì?",
+      "optionA": "Rotterdam",
+      "optionB": "The Hague",
+      "optionC": "Amsterdam",
+      "optionD": "Utrecht",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q74",
+      "question": "Bao nhiêu ngày trong một năm?",
+      "optionA": "360",
+      "optionB": "364",
+      "optionC": "365",
+      "optionD": "366",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q75",
+      "question": "Instagram được thành lập năm nào?",
+      "optionA": "2008",
+      "optionB": "2010",
+      "optionC": "2012",
+      "optionD": "2014",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q76",
+      "question": "Thủ đô của Brazil là gì?",
+      "optionA": "São Paulo",
+      "optionB": "Rio de Janeiro",
+      "optionC": "Brasília",
+      "optionD": "Salvador",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q77",
+      "question": "Bao nhiêu tháng trong một năm?",
+      "optionA": "10",
+      "optionB": "11",
+      "optionC": "12",
+      "optionD": "13",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q78",
+      "question": "Amazon được thành lập năm nào?",
+      "optionA": "1992",
+      "optionB": "1994",
+      "optionC": "1996",
+      "optionD": "1998",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q79",
+      "question": "Thủ đô của Argentina là gì?",
+      "optionA": "Córdoba",
+      "optionB": "Rosario",
+      "optionC": "Buenos Aires",
+      "optionD": "Mendoza",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q80",
+      "question": "Bao nhiêu tuần trong một năm?",
+      "optionA": "50",
+      "optionB": "51",
+      "optionC": "52",
+      "optionD": "53",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q81",
+      "question": "Apple được thành lập năm nào?",
+      "optionA": "1974",
+      "optionB": "1976",
+      "optionC": "1978",
+      "optionD": "1980",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q82",
+      "question": "Thủ đô của Ấn Độ là gì?",
+      "optionA": "Mumbai",
+      "optionB": "Kolkata",
+      "optionC": "New Delhi",
+      "optionD": "Bangalore",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q83",
+      "question": "Bao nhiêu nghĩa trang quốc gia Arlington?",
+      "optionA": "1",
+      "optionB": "2",
+      "optionC": "3",
+      "optionD": "4",
+      "correctAnswer": "A"
+    },
+    {
+      "questionId": "q84",
+      "question": "Spotify được thành lập năm nào?",
+      "optionA": "2004",
+      "optionB": "2006",
+      "optionC": "2008",
+      "optionD": "2010",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q85",
+      "question": "Thủ đô của Indonesia là gì?",
+      "optionA": "Bali",
+      "optionB": "Surabaya",
+      "optionC": "Jakarta",
+      "optionD": "Bandung",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q86",
+      "question": "Bao nhiêu chữ cái trong bảng chữ cái tiếng Anh?",
+      "optionA": "24",
+      "optionB": "25",
+      "optionC": "26",
+      "optionD": "27",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q87",
+      "question": "Samsung được thành lập ở quốc gia nào?",
+      "optionA": "Nhật Bản",
+      "optionB": "Trung Quốc",
+      "optionC": "Hàn Quốc",
+      "optionD": "Đài Loan",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q88",
+      "question": "Thủ đô của Malaysia là gì?",
+      "optionA": "Penang",
+      "optionB": "Kuala Lumpur",
+      "optionC": "Johor Bahru",
+      "optionD": "Malacca",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q89",
+      "question": "Bao nhiêu phút trong nửa giờ?",
+      "optionA": "20",
+      "optionB": "25",
+      "optionC": "30",
+      "optionD": "35",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q90",
+      "question": "LinkedIn được thành lập năm nào?",
+      "optionA": "2001",
+      "optionB": "2003",
+      "optionC": "2005",
+      "optionD": "2007",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q91",
+      "question": "Thủ đô của Philippines là gì?",
+      "optionA": "Cebu",
+      "optionB": "Davao",
+      "optionC": "Manila",
+      "optionD": "Quezon",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q92",
+      "question": "Bao nhiêu giờ trong nửa ngày?",
+      "optionA": "10",
+      "optionB": "11",
+      "optionC": "12",
+      "optionD": "13",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q93",
+      "question": "Reddit được thành lập năm nào?",
+      "optionA": "2003",
+      "optionB": "2005",
+      "optionC": "2007",
+      "optionD": "2009",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q94",
+      "question": "Thủ đô của Singapore là gì?",
+      "optionA": "Singapore",
+      "optionB": "Sentosa",
+      "optionC": "Jurong",
+      "optionD": "Changi",
+      "correctAnswer": "A"
+    },
+    {
+      "questionId": "q95",
+      "question": "Bao nhiêu ngày trong tháng 4?",
+      "optionA": "28",
+      "optionB": "29",
+      "optionC": "30",
+      "optionD": "31",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q96",
+      "question": "TikTok được thành lập ở quốc gia nào?",
+      "optionA": "Nhật Bản",
+      "optionB": "Hàn Quốc",
+      "optionC": "Trung Quốc",
+      "optionD": "Mỹ",
+      "correctAnswer": "C"
+    },
+    {
+      "questionId": "q97",
+      "question": "Thủ đô của Thổ Nhĩ Kỳ là gì?",
+      "optionA": "Istanbul",
+      "optionB": "Ankara",
+      "optionC": "Izmir",
+      "optionD": "Antalya",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q98",
+      "question": "Bao nhiêu góc trong tam giác?",
+      "optionA": "2",
+      "optionB": "3",
+      "optionC": "4",
+      "optionD": "5",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q99",
+      "question": "Zoom được thành lập năm nào?",
+      "optionA": "2009",
+      "optionB": "2011",
+      "optionC": "2013",
+      "optionD": "2015",
+      "correctAnswer": "B"
+    },
+    {
+      "questionId": "q100",
+      "question": "Thủ đô của Mexico là gì?",
+      "optionA": "Guadalajara",
+      "optionB": "Monterrey",
+      "optionC": "Cancún",
+      "optionD": "Mexico City",
+      "correctAnswer": "D"
+    }
+  ]
+}
