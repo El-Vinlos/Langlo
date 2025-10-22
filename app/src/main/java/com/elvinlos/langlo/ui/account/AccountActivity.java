@@ -22,6 +22,7 @@ import com.elvinlos.langlo.ui.main.MainActivity;
 import com.elvinlos.langlo.utils.Navigation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.Executors;
 
@@ -60,13 +61,23 @@ public class AccountActivity extends AppCompatActivity {
     private void setUserName() {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            String userName = currentUser.getDisplayName();
-            if (userName != null && !userName.isEmpty()) {
-                nameTextView.setText(userName);
-            } else {
-                nameTextView.setText("Welcome!");
-                Navigation.navigateToActivity(AccountActivity.this, MainActivity.class);
-            }
+            String uid = currentUser.getUid();
+
+            // Lấy tên từ Database
+            FirebaseDatabase db = FirebaseDatabase.getInstance("https://langlo-7c380-default-rtdb.asia-southeast1.firebasedatabase.app/");
+            db.getReference("users").child(uid).child("name").get()
+                    .addOnSuccessListener(snapshot -> {
+                        if (snapshot.exists()) {
+                            String userName = snapshot.getValue(String.class);
+                            nameTextView.setText(userName);
+                        } else {
+                            nameTextView.setText("Welcome!");
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e("AccountActivity", "Failed to get user name", e);
+                        nameTextView.setText("Welcome!");
+                    });
         } else {
             Navigation.navigateToActivity(AccountActivity.this, LoginActivity.class);
             finish();
