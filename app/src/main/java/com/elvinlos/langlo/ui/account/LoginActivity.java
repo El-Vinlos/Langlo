@@ -10,6 +10,7 @@ import com.elvinlos.langlo.FirebaseHelper;
 import com.elvinlos.langlo.R;
 import com.elvinlos.langlo.User;
 import com.elvinlos.langlo.utils.Navigation;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +27,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         firebaseHelper = new FirebaseHelper(this);
+
+        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         Button googleSignInBtn = findViewById(R.id.btn_google_signin);
         googleSignInBtn.setOnClickListener(v -> logIn());
