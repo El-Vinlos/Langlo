@@ -1,57 +1,62 @@
 package com.elvinlos.langlo;
 
-import com.google.firebase.database.Exclude;
-
-import java.util.HashMap;
-import java.util.Map;
-
 public class User {
-    public String name;
-    public Map<String, Integer> scores;
-    public int total_score;
-    private String uid;
+    private String userId;
+    private String username;
+    private String email;
+    private int totalScore;
+    private int gamesPlayed;
 
-    public User() {
-        // Required for Firebase
+    public User(String name, int i) {
     }
 
-    public User(String name, int totalScore) {
-        this.name = name;
-        this.scores = new HashMap<>();
-        this.total_score = totalScore;
+    public User(String userId, String username, String email) {
+        this.userId = userId;
+        this.username = username;
+        this.email = email;
+        this.totalScore = 0;
+        this.gamesPlayed = 0;
     }
 
-    public String getName() {
-        return name;
+    // Getters
+    public String getUserId() {
+        return userId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getUsername() {
+        return username;
     }
 
-    public Map<String, Integer> getScores() {
-        return scores;
+    public String getEmail() {
+        return email;
     }
 
-    public void setScores(Map<String, Integer> scores) {
-        this.scores = scores;
+    public int getTotalScore() {
+        return totalScore;
     }
 
-    public int getTotal_score() {
-        return total_score;
+    public int getGamesPlayed() {
+        return gamesPlayed;
     }
 
-    public void setTotal_score(int total_score) {
-        this.total_score = total_score;
+    // Setters
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    // Use @Exclude to prevent Firebase from storing UID
-    @Exclude
-    public String getUid() {
-        return uid;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setTotalScore(int totalScore) {
+        this.totalScore = totalScore;
+    }
+
+    public void setGamesPlayed(int gamesPlayed) {
+        this.gamesPlayed = gamesPlayed;
     }
 }

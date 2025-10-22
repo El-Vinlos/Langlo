@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.elvinlos.langlo.ui.deck.DeckActivity;
+import com.elvinlos.langlo.ui.exam.ExamActivity;
 import com.elvinlos.langlo.ui.main.MainActivity;
 import com.elvinlos.langlo.R;
 import com.elvinlos.langlo.ui.speech.SpeakActivity;
@@ -41,6 +42,13 @@ public class DrawerHandler {
         } else if (id == R.id.nav_card) {
             if (!(activity instanceof DeckActivity)) {
                 activity.startActivity(new Intent(activity, DeckActivity.class));
+                activity.finish();
+                topAppBar.getMenu().clear();
+                topAppBar.inflateMenu(R.menu.top_app_bar_deck);
+            }
+        } else if (id == R.id.nav_exam) {
+            if (!(activity instanceof ExamActivity)) {
+                activity.startActivity(new Intent(activity, ExamActivity.class));
                 activity.finish();
                 topAppBar.getMenu().clear();
                 topAppBar.inflateMenu(R.menu.top_app_bar_deck);
