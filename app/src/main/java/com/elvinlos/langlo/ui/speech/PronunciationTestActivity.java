@@ -314,7 +314,7 @@ public class PronunciationTestActivity extends AppCompatActivity {
 
     private void uploadScoreForUser(String word, int score) {
         if (mAuth.getCurrentUser() == null) {
-            Toast.makeText(this, "User not logged in.", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "User not logged in.", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -328,8 +328,6 @@ public class PronunciationTestActivity extends AppCompatActivity {
                 .child("scores")
                 .child(word)
                 .setValue(scoreData)
-                .addOnSuccessListener(aVoid ->
-                        Toast.makeText(this, "Score uploaded for " + word, Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e ->
                         Toast.makeText(this, "Failed to upload score: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }

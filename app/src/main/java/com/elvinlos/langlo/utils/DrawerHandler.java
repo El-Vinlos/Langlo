@@ -47,7 +47,7 @@ public class DrawerHandler {
             }
         } else if (id == R.id.nav_setting) {
             //TODO : ADD SETTING
-        } else if (id == R.id.nav_speak_and_listen) {
+        } else if (id == R.id.nav_speak) {
             if (!(activity instanceof SpeakActivity)) {
                 activity.startActivity(new Intent(activity, SpeakActivity.class));
                 activity.finish();
