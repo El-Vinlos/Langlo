@@ -3,22 +3,22 @@ package com.elvinlos.langlo.ui.exam;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.PagerSnapHelper;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.elvinlos.langlo.R;
-import com.elvinlos.langlo.ui.exam.ExamAdapter;
 import com.elvinlos.langlo.Question;
+import com.elvinlos.langlo.R;
 import com.elvinlos.langlo.User;
 import com.elvinlos.langlo.ui.main.MainActivity;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -35,16 +35,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ExamActivity extends AppCompatActivity implements ExamAdapter.OnAnswerSelectedListener {
-    private static final String TAG = "ExamActivity";
-    private RecyclerView questionsRecyclerView;
-    private Button submitButton;
-    private ProgressBar progressBar;
-    private Toolbar toolbar;
+public class ExamActivity extends AppCompatActivity {
 
-    private ExamAdapter adapter;
+    private MaterialToolbar toolbar;
+    private TextView questionNumberTextView;
+    private TextView questionTextView;
+    private TextView progressText;
+    private TextView scoreText;
+    private RadioGroup optionsRadioGroup;
+    private RadioButton optionA, optionB, optionC, optionD;
+    private MaterialButton nextButton;
+    private ProgressBar progressBar;
+    private LinearProgressIndicator progressIndicator;
+
     private List<Question> questionList;
-    private Map<Integer, String> userAnswers; // Store user's answers
+    private Map<Integer, String> userAnswers;
+    private int currentQuestionIndex = 0;
 
     private int score = 0;
     private final int TOTAL_QUESTIONS = 10;
@@ -53,6 +59,7 @@ public class ExamActivity extends AppCompatActivity implements ExamAdapter.OnAns
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
     private String userId;
+    private String quizId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +78,10 @@ public class ExamActivity extends AppCompatActivity implements ExamAdapter.OnAns
             return;
         }
 
+        // Get quiz ID from intent
+        Intent intent = getIntent();
+        quizId = intent.getStringExtra("quiz_id");
+
         // Initialize views
         initViews();
 
@@ -80,11 +91,11 @@ public class ExamActivity extends AppCompatActivity implements ExamAdapter.OnAns
         // Load questions from JSON
         loadQuestionsFromJson();
 
-        // Setup RecyclerView
-        setupRecyclerView();
+        // Display first question
+        displayQuestion();
 
-        // Setup submit button
-        submitButton.setOnClickListener(v -> submitExam());
+        // Setup listeners
+        setupListeners();
 
         // Setup toolbar back button
         toolbar.setNavigationOnClickListener(v -> showExitDialog());
@@ -92,24 +103,92 @@ public class ExamActivity extends AppCompatActivity implements ExamAdapter.OnAns
 
     private void initViews() {
         toolbar = findViewById(R.id.toolbar);
-        questionsRecyclerView = findViewById(R.id.questionsRecyclerView);
-        submitButton = findViewById(R.id.submitButton);
+        questionNumberTextView = findViewById(R.id.questionNumberTextView);
+        questionTextView = findViewById(R.id.questionTextView);
+        progressText = findViewById(R.id.progressText);
+        scoreText = findViewById(R.id.scoreText);
+        optionsRadioGroup = findViewById(R.id.optionsRadioGroup);
+        optionA = findViewById(R.id.optionA);
+        optionB = findViewById(R.id.optionB);
+        optionC = findViewById(R.id.optionC);
+        optionD = findViewById(R.id.optionD);
+        nextButton = findViewById(R.id.nextButton);
         progressBar = findViewById(R.id.progressBar);
+        progressIndicator = findViewById(R.id.progressIndicator);
     }
 
-    private void setupRecyclerView() {
-        adapter = new ExamAdapter(questionList, this);
-        questionsRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        questionsRecyclerView.setAdapter(adapter);
+    private void setupListeners() {
+        // Enable next button when an answer is selected
+        optionsRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            nextButton.setEnabled(true);
 
-        // Add snap helper for page-like scrolling
-        PagerSnapHelper snapHelper = new PagerSnapHelper();
-        snapHelper.attachToRecyclerView(questionsRecyclerView);
+            String answer = "";
+            if (checkedId == R.id.optionA) answer = "A";
+            else if (checkedId == R.id.optionB) answer = "B";
+            else if (checkedId == R.id.optionC) answer = "C";
+            else if (checkedId == R.id.optionD) answer = "D";
+
+            userAnswers.put(currentQuestionIndex, answer);
+        });
+
+        // Next button click
+        nextButton.setOnClickListener(v -> {
+            if (currentQuestionIndex < questionList.size() - 1) {
+                currentQuestionIndex++;
+                displayQuestion();
+            } else {
+                // Last question, submit exam
+                submitExam();
+            }
+        });
+    }
+
+    private void displayQuestion() {
+        if (questionList == null || questionList.isEmpty()) return;
+
+        Question question = questionList.get(currentQuestionIndex);
+
+        // Update question number and progress
+        questionNumberTextView.setText("Câu " + (currentQuestionIndex + 1));
+        progressText.setText("Câu " + (currentQuestionIndex + 1) + "/" + questionList.size());
+
+        // Update progress indicator
+        int progress = (int) (((currentQuestionIndex + 1) / (float) questionList.size()) * 100);
+        progressIndicator.setProgress(progress);
+
+        // Update question and options
+        questionTextView.setText(question.getQuestion());
+        optionA.setText(question.getOptionA());
+        optionB.setText(question.getOptionB());
+        optionC.setText(question.getOptionC());
+        optionD.setText(question.getOptionD());
+
+        // Clear selection
+        optionsRadioGroup.clearCheck();
+
+        // Restore previous answer if exists
+        if (userAnswers.containsKey(currentQuestionIndex)) {
+            String previousAnswer = userAnswers.get(currentQuestionIndex);
+            if ("A".equals(previousAnswer)) optionA.setChecked(true);
+            else if ("B".equals(previousAnswer)) optionB.setChecked(true);
+            else if ("C".equals(previousAnswer)) optionC.setChecked(true);
+            else if ("D".equals(previousAnswer)) optionD.setChecked(true);
+            nextButton.setEnabled(true);
+        } else {
+            nextButton.setEnabled(false);
+        }
+
+        // Change button text for last question
+        if (currentQuestionIndex == questionList.size() - 1) {
+            nextButton.setText("Nộp bài");
+            nextButton.setIcon(null);
+        } else {
+            nextButton.setText("Câu tiếp theo");
+        }
     }
 
     private void loadQuestionsFromJson() {
         try {
-            // Read JSON file from assets
             InputStream is = getAssets().open("questions.json");
             int size = is.available();
             byte[] buffer = new byte[size];
@@ -117,13 +196,11 @@ public class ExamActivity extends AppCompatActivity implements ExamAdapter.OnAns
             is.close();
             String json = new String(buffer, "UTF-8");
 
-            // Parse JSON
             JSONObject jsonObject = new JSONObject(json);
             JSONArray questionsArray = jsonObject.getJSONArray("questions");
 
             questionList = new ArrayList<>();
 
-            // Convert JSON array to Question objects
             for (int i = 0; i < questionsArray.length(); i++) {
                 JSONObject questionObj = questionsArray.getJSONObject(i);
 
@@ -140,7 +217,6 @@ public class ExamActivity extends AppCompatActivity implements ExamAdapter.OnAns
                 questionList.add(question);
             }
 
-            // Shuffle questions and take only TOTAL_QUESTIONS
             Collections.shuffle(questionList);
             questionList = questionList.subList(0, Math.min(TOTAL_QUESTIONS, questionList.size()));
 
@@ -149,12 +225,6 @@ public class ExamActivity extends AppCompatActivity implements ExamAdapter.OnAns
             Toast.makeText(this, "Lỗi khi tải câu hỏi!", Toast.LENGTH_SHORT).show();
             finish();
         }
-    }
-
-    @Override
-    public void onAnswerSelected(int position, String answer) {
-        // Store user's answer
-        userAnswers.put(position, answer);
     }
 
     private void submitExam() {
@@ -175,27 +245,34 @@ public class ExamActivity extends AppCompatActivity implements ExamAdapter.OnAns
             }
         }
 
-        // Save score to Firebase
         finishExam();
     }
 
     private void finishExam() {
         progressBar.setVisibility(View.VISIBLE);
-        submitButton.setEnabled(false);
+        nextButton.setEnabled(false);
 
-        // Update user score in Firebase
         databaseReference.child("users").child(userId).get().addOnSuccessListener(dataSnapshot -> {
             User user = dataSnapshot.getValue(User.class);
             if (user != null) {
-                // Update user stats
                 int newTotalScore = user.getTotalScore() + score;
                 int newGamesPlayed = user.getGamesPlayed() + 1;
 
-                // Update in Firebase
                 databaseReference.child("users").child(userId).child("totalScore").setValue(newTotalScore);
                 databaseReference.child("users").child(userId).child("gamesPlayed").setValue(newGamesPlayed);
 
-                // Update leaderboard
+                if (quizId != null) {
+                    databaseReference.child("users").child(userId)
+                            .child("quizScores").child(quizId)
+                            .get().addOnSuccessListener(quizScoreSnapshot -> {
+                                Long currentHighScore = quizScoreSnapshot.getValue(Long.class);
+                                if (currentHighScore == null || score > currentHighScore) {
+                                    databaseReference.child("users").child(userId)
+                                            .child("quizScores").child(quizId).setValue((long) score);
+                                }
+                            });
+                }
+
                 databaseReference.child("leaderboard").child(userId).child("username").setValue(user.getUsername());
                 databaseReference.child("leaderboard").child(userId).child("totalScore").setValue(newTotalScore);
                 databaseReference.child("leaderboard").child(userId).child("gamesPlayed").setValue(newGamesPlayed);
@@ -205,12 +282,13 @@ public class ExamActivity extends AppCompatActivity implements ExamAdapter.OnAns
             }
         }).addOnFailureListener(e -> {
             progressBar.setVisibility(View.GONE);
+            nextButton.setEnabled(true);
             Toast.makeText(this, "Lỗi khi lưu điểm!", Toast.LENGTH_SHORT).show();
         });
     }
 
     private void showResultDialog(int totalScore, int gamesPlayed) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
         builder.setTitle("Hoàn thành Bài kiểm tra!");
         builder.setMessage("Điểm lần này: " + score + " điểm\n" +
                 "Tổng điểm của bạn: " + totalScore + " điểm\n" +
@@ -223,6 +301,7 @@ public class ExamActivity extends AppCompatActivity implements ExamAdapter.OnAns
         });
         builder.setNegativeButton("Làm lại", (dialog, which) -> {
             Intent intent = new Intent(ExamActivity.this, ExamActivity.class);
+            intent.putExtra("quiz_id", quizId);
             startActivity(intent);
             finish();
         });
@@ -231,11 +310,16 @@ public class ExamActivity extends AppCompatActivity implements ExamAdapter.OnAns
     }
 
     private void showExitDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
         builder.setTitle("Thoát bài kiểm tra?");
         builder.setMessage("Bạn có chắc muốn thoát? Điểm số sẽ không được lưu!");
         builder.setPositiveButton("Thoát", (dialog, which) -> finish());
         builder.setNegativeButton("Tiếp tục", null);
         builder.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        showExitDialog();
     }
 }
