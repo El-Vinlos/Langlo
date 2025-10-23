@@ -7,6 +7,9 @@ public class User {
     private int totalScore;
     private int gamesPlayed;
 
+    public User() {
+        // Default constructor required for Firebase
+    }
     public User(String name, int i) {
     }
 
@@ -17,7 +20,6 @@ public class User {
         this.totalScore = 0;
         this.gamesPlayed = 0;
     }
-
     // Getters
     public String getUserId() {
         return userId;

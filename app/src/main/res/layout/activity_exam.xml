@@ -12,7 +12,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        app:title="Bài kiểm tra"
+        app:title="Câu hỏi"
         app:titleTextColor="?attr/colorOnPrimary"
         app:navigationIcon="@drawable/back"
         app:navigationIconTint="?attr/colorOnPrimary"/>
@@ -33,7 +33,7 @@
             android:text="Câu 1/10"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="?attr/colorPrimary"/>
+            android:textColor="?android:attr/textColorPrimary"/>
 
         <TextView
             android:id="@+id/scoreText"
@@ -49,8 +49,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        app:indicatorColor="?attr/colorPrimary"
-        app:trackColor="?attr/colorSurfaceContainerHighest"
+        app:indicatorColor="?attr/colorOnSurface"
+        app:trackColor="?attr/colorSurfaceVariant"
         app:trackThickness="8dp"
         app:trackCornerRadius="4dp"/>
 
