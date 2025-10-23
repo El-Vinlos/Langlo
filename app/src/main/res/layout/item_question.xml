@@ -13,8 +13,8 @@
         android:text="Câu 1"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="?attr/colorPrimary"
-        android:layout_marginBottom="16dp"/>
+        android:textColor="?android:attr/textColorPrimary"
+        android:layout_marginBottom="16dp" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -46,52 +46,60 @@
             android:id="@+id/optionA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="56dp"
             android:padding="16dp"
             android:text="Đáp án A"
             android:textSize="16sp"
-            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textColor="?android:attr/textColorPrimary"
             android:background="@drawable/radio_button_background"
             android:layout_marginBottom="12dp"
-            android:button="@null"
-            android:drawablePadding="8dp"/>
+            android:buttonTint="?attr/colorPrimary"
+            android:clickable="true"
+            android:focusable="true"/>
 
         <RadioButton
             android:id="@+id/optionB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="56dp"
             android:padding="16dp"
             android:text="Đáp án B"
             android:textSize="16sp"
-            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textColor="?android:attr/textColorPrimary"
             android:background="@drawable/radio_button_background"
             android:layout_marginBottom="12dp"
-            android:button="@null"
-            android:drawablePadding="8dp"/>
+            android:buttonTint="?attr/colorPrimary"
+            android:clickable="true"
+            android:focusable="true"/>
 
         <RadioButton
             android:id="@+id/optionC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="56dp"
             android:padding="16dp"
             android:text="Đáp án C"
             android:textSize="16sp"
-            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textColor="?android:attr/textColorPrimary"
             android:background="@drawable/radio_button_background"
             android:layout_marginBottom="12dp"
-            android:button="@null"
-            android:drawablePadding="8dp"/>
+            android:buttonTint="?attr/colorPrimary"
+            android:clickable="true"
+            android:focusable="true"/>
 
         <RadioButton
             android:id="@+id/optionD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="56dp"
             android:padding="16dp"
             android:text="Đáp án D"
             android:textSize="16sp"
-            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textColor="?android:attr/textColorPrimary"
             android:background="@drawable/radio_button_background"
-            android:button="@null"
-            android:drawablePadding="8dp"/>
+            android:buttonTint="?attr/colorPrimary"
+            android:clickable="true"
+            android:focusable="true"/>
 
     </RadioGroup>
 

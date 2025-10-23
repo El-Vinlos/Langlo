@@ -10,22 +10,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.elvinlos.langlo.R;
 import com.elvinlos.langlo.Question;
+import com.elvinlos.langlo.R;
 
 import java.util.List;
 
 public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.QuestionViewHolder> {
 
-    private List<Question> questionList;
-    private OnAnswerSelectedListener listener;
+    private final List<Question> questions;
+    private final OnAnswerSelectedListener listener;
 
     public interface OnAnswerSelectedListener {
         void onAnswerSelected(int position, String answer);
     }
 
-    public ExamAdapter(List<Question> questionList, OnAnswerSelectedListener listener) {
-        this.questionList = questionList;
+    public ExamAdapter(List<Question> questions, OnAnswerSelectedListener listener) {
+        this.questions = questions;
         this.listener = listener;
     }
 
@@ -39,22 +39,46 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.QuestionViewHo
 
     @Override
     public void onBindViewHolder(@NonNull QuestionViewHolder holder, int position) {
-        Question question = questionList.get(position);
-        holder.bind(question, position);
+        Question question = questions.get(position);
+
+        holder.questionNumberTextView.setText("Câu " + (position + 1));
+        holder.questionTextView.setText(question.getQuestion());
+        holder.optionA.setText(question.getOptionA());
+        holder.optionB.setText(question.getOptionB());
+        holder.optionC.setText(question.getOptionC());
+        holder.optionD.setText(question.getOptionD());
+
+        // Clear previous selection
+        holder.optionsRadioGroup.clearCheck();
+
+        // Set listener for answer selection
+        holder.optionsRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            String answer = "";
+            if (checkedId == R.id.optionA) {
+                answer = "A";
+            } else if (checkedId == R.id.optionB) {
+                answer = "B";
+            } else if (checkedId == R.id.optionC) {
+                answer = "C";
+            } else if (checkedId == R.id.optionD) {
+                answer = "D";
+            }
+            listener.onAnswerSelected(position, answer);
+        });
     }
 
     @Override
     public int getItemCount() {
-        return questionList.size();
+        return questions.size();
     }
 
-    class QuestionViewHolder extends RecyclerView.ViewHolder {
-        private TextView questionNumberTextView;
-        private TextView questionTextView;
-        private RadioGroup optionsRadioGroup;
-        private RadioButton optionA, optionB, optionC, optionD;
+    static class QuestionViewHolder extends RecyclerView.ViewHolder {
+        TextView questionNumberTextView;
+        TextView questionTextView;
+        RadioGroup optionsRadioGroup;
+        RadioButton optionA, optionB, optionC, optionD;
 
-        public QuestionViewHolder(@NonNull View itemView) {
+        QuestionViewHolder(@NonNull View itemView) {
             super(itemView);
             questionNumberTextView = itemView.findViewById(R.id.questionNumberTextView);
             questionTextView = itemView.findViewById(R.id.questionTextView);
@@ -63,46 +87,6 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.QuestionViewHo
             optionB = itemView.findViewById(R.id.optionB);
             optionC = itemView.findViewById(R.id.optionC);
             optionD = itemView.findViewById(R.id.optionD);
-        }
-
-        public void bind(Question question, int position) {
-            // Set question number and text
-            questionNumberTextView.setText("Câu " + (position + 1));
-            questionTextView.setText(question.getQuestion());
-
-            // Set options
-            optionA.setText("A. " + question.getOptionA());
-            optionB.setText("B. " + question.getOptionB());
-            optionC.setText("C. " + question.getOptionC());
-            optionD.setText("D. " + question.getOptionD());
-
-            // Clear previous selection
-            optionsRadioGroup.clearCheck();
-
-            // Setup listeners
-            setupRadioButtonListeners(position);
-        }
-
-        private void setupRadioButtonListeners(int position) {
-            View.OnClickListener clickListener = v -> {
-                int id = v.getId();
-                optionsRadioGroup.check(id);
-
-                String selectedAnswer = "";
-                if (id == R.id.optionA) selectedAnswer = "A";
-                else if (id == R.id.optionB) selectedAnswer = "B";
-                else if (id == R.id.optionC) selectedAnswer = "C";
-                else if (id == R.id.optionD) selectedAnswer = "D";
-
-                if (listener != null) {
-                    listener.onAnswerSelected(position, selectedAnswer);
-                }
-            };
-
-            optionA.setOnClickListener(clickListener);
-            optionB.setOnClickListener(clickListener);
-            optionC.setOnClickListener(clickListener);
-            optionD.setOnClickListener(clickListener);
         }
     }
 }
