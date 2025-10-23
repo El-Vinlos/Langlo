@@ -14,29 +14,177 @@
         android:elevation="4dp"
         app:title="Bài kiểm tra"
         app:titleTextColor="?attr/colorOnPrimary"
-        app:navigationIcon="@android:drawable/ic_menu_close_clear_cancel"
+        app:navigationIcon="@drawable/back"
         app:navigationIconTint="?attr/colorOnPrimary"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/questionsRecyclerView"
+    <!-- Progress Indicator -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/progressText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Câu 1/10"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="?attr/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/scoreText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Điểm: 0"
+            android:textSize="16sp"
+            android:textColor="?android:attr/textColorSecondary"/>
+    </LinearLayout>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progressIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        app:indicatorColor="?attr/colorPrimary"
+        app:trackColor="?attr/colorSurfaceContainerHighest"
+        app:trackThickness="8dp"
+        app:trackCornerRadius="4dp"/>
+
+    <!-- Question Area -->
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:padding="16dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/questionNumberTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Câu 1"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="?android:attr/textColorPrimary"
+                android:layout_marginBottom="16dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="?attr/colorSurfaceContainerHighest">
+
+                <TextView
+                    android:id="@+id/questionTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Câu hỏi sẽ hiển thị ở đây..."
+                    android:textSize="18sp"
+                    android:textColor="?attr/colorOnSurface"
+                    android:lineSpacingExtra="4dp"
+                    android:minHeight="120dp"
+                    android:padding="20dp"
+                    android:gravity="center_vertical"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <RadioGroup
+                android:id="@+id/optionsRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/optionA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="56dp"
+                    android:padding="16dp"
+                    android:text="Đáp án A"
+                    android:textSize="16sp"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:background="@drawable/radio_button_background"
+                    android:layout_marginBottom="12dp"
+                    android:buttonTint="?attr/colorPrimary"
+                    android:clickable="true"
+                    android:focusable="true"/>
+
+                <RadioButton
+                    android:id="@+id/optionB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="56dp"
+                    android:padding="16dp"
+                    android:text="Đáp án B"
+                    android:textSize="16sp"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:background="@drawable/radio_button_background"
+                    android:layout_marginBottom="12dp"
+                    android:buttonTint="?attr/colorPrimary"
+                    android:clickable="true"
+                    android:focusable="true"/>
+
+                <RadioButton
+                    android:id="@+id/optionC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="56dp"
+                    android:padding="16dp"
+                    android:text="Đáp án C"
+                    android:textSize="16sp"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:background="@drawable/radio_button_background"
+                    android:layout_marginBottom="12dp"
+                    android:buttonTint="?attr/colorPrimary"
+                    android:clickable="true"
+                    android:focusable="true"/>
+
+                <RadioButton
+                    android:id="@+id/optionD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="56dp"
+                    android:padding="16dp"
+                    android:text="Đáp án D"
+                    android:textSize="16sp"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:background="@drawable/radio_button_background"
+                    android:buttonTint="?attr/colorPrimary"
+                    android:clickable="true"
+                    android:focusable="true"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:background="?attr/colorSurface"
+        android:elevation="8dp">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/submitButton"
+            android:id="@+id/nextButton"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="Nộp bài"
+            android:text="Câu tiếp theo"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:enabled="false"
             app:cornerRadius="12dp"
+            app:iconGravity="end"
             app:backgroundTint="?attr/colorPrimary"/>
 
         <ProgressBar
@@ -44,7 +192,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:visibility="gone"
             android:indeterminateTint="?attr/colorPrimary"/>
 
