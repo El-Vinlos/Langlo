@@ -9,14 +9,17 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.elvinlos.langlo.Question;
 import com.elvinlos.langlo.R;
 import com.elvinlos.langlo.User;
 import com.elvinlos.langlo.ui.main.MainActivity;
+import com.elvinlos.langlo.utils.Navigation;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.color.MaterialColors;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.firebase.auth.FirebaseAuth;
@@ -288,7 +291,7 @@ public class ExamActivity extends AppCompatActivity {
     }
 
     private void showResultDialog(int totalScore, int gamesPlayed) {
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, R.style.CustomMaterialAlertDialog);
         builder.setTitle("Hoàn thành Bài kiểm tra!");
         builder.setMessage("Điểm lần này: " + score + " điểm\n" +
                 "Tổng điểm của bạn: " + totalScore + " điểm\n" +
@@ -310,16 +313,16 @@ public class ExamActivity extends AppCompatActivity {
     }
 
     private void showExitDialog() {
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, R.style.CustomMaterialAlertDialog);
         builder.setTitle("Thoát bài kiểm tra?");
         builder.setMessage("Bạn có chắc muốn thoát? Điểm số sẽ không được lưu!");
-        builder.setPositiveButton("Thoát", (dialog, which) -> finish());
+        builder.setPositiveButton("Thoát", (dialog, which) -> Navigation.navigateToActivity(this, MainActivity.class));
         builder.setNegativeButton("Tiếp tục", null);
         builder.show();
     }
 
-    @Override
-    public void onBackPressed() {
-        showExitDialog();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        showExitDialog();
+//    }
 }
