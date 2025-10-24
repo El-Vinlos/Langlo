@@ -73,13 +73,7 @@ public class ExamActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        if (mAuth.getCurrentUser() != null) {
-            userId = mAuth.getCurrentUser().getUid();
-        } else {
-            Toast.makeText(this, "Vui lòng đăng nhập!", Toast.LENGTH_SHORT).show();
-            finish();
-            return;
-        }
+        IsLogin();
 
         // Get quiz ID from intent
         Intent intent = getIntent();
@@ -102,6 +96,16 @@ public class ExamActivity extends AppCompatActivity {
 
         // Setup toolbar back button
         toolbar.setNavigationOnClickListener(v -> showExitDialog());
+    }
+
+    public boolean IsLogin() {
+        if (mAuth.getCurrentUser() != null) {
+            userId = mAuth.getCurrentUser().getUid();
+            return true;
+        } else {
+            Toast.makeText(this, "Vui lòng đăng nhập!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
     }
 
     private void initViews() {
@@ -276,7 +280,7 @@ public class ExamActivity extends AppCompatActivity {
                             });
                 }
 
-                databaseReference.child("leaderboard").child(userId).child("username").setValue(user.getUsername());
+                databaseReference.child("leaderboard").child(userId).child("username").setValue(user.getName());
                 databaseReference.child("leaderboard").child(userId).child("totalScore").setValue(newTotalScore);
                 databaseReference.child("leaderboard").child(userId).child("gamesPlayed").setValue(newGamesPlayed);
 

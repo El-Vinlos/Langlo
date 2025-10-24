@@ -2,7 +2,7 @@ package com.elvinlos.langlo;
 
 public class User {
     private String userId;
-    private String username;
+    private String name;
     private String email;
     private int totalScore;
     private int gamesPlayed;
@@ -10,23 +10,29 @@ public class User {
     public User() {
         // Default constructor required for Firebase
     }
-    public User(String name, int i) {
+
+    // Constructor được sử dụng trong promptForName
+    public User(String name, int totalScore) {
+        this.name = name;  // Gán vào name
+        this.totalScore = totalScore;
+        this.gamesPlayed = 0;
     }
 
-    public User(String userId, String username, String email) {
+    public User(String userId, String name, String email) {
         this.userId = userId;
-        this.username = username;
+        this.name = name;  // Gán vào name
         this.email = email;
         this.totalScore = 0;
         this.gamesPlayed = 0;
     }
+
     // Getters
     public String getUserId() {
         return userId;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {  // ĐỔI TỪ getUsername → getName
+        return name;
     }
 
     public String getEmail() {
@@ -46,8 +52,8 @@ public class User {
         this.userId = userId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {  // ĐỔI TỪ setUsername → setName
+        this.name = name;
     }
 
     public void setEmail(String email) {
