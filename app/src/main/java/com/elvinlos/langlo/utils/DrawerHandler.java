@@ -1,18 +1,23 @@
 package com.elvinlos.langlo.utils;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.elvinlos.langlo.ui.account.LoginActivity;
 import com.elvinlos.langlo.ui.deck.DeckActivity;
 import com.elvinlos.langlo.ui.exam.ExamActivity;
 import com.elvinlos.langlo.ui.main.MainActivity;
 import com.elvinlos.langlo.R;
 import com.elvinlos.langlo.ui.speech.SpeakActivity;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class DrawerHandler {
 
@@ -47,7 +52,9 @@ public class DrawerHandler {
                 topAppBar.inflateMenu(R.menu.top_app_bar_deck);
             }
         } else if (id == R.id.nav_exam) {
-            if (!(activity instanceof ExamActivity)) {
+            if (!isUserLoggedIn(activity)) {
+                showLoginRequiredDialog(activity);
+            } else if (!(activity instanceof ExamActivity)) {
                 activity.startActivity(new Intent(activity, ExamActivity.class));
                 activity.finish();
                 topAppBar.getMenu().clear();
@@ -65,5 +72,34 @@ public class DrawerHandler {
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
+    }
+
+    /**
+     * Kiểm tra xem người dùng đã đăng nhập chưa
+     *
+     * @param context Context để khởi tạo FirebaseAuth
+     * @return true nếu đã đăng nhập, false nếu chưa
+     */
+    private static boolean isUserLoggedIn(Context context) {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        return mAuth.getCurrentUser() != null;
+    }
+
+    /**
+     * Hiển thị dialog yêu cầu đăng nhập
+     *
+     * @param activity Activity hiện tại
+     */
+    private static void showLoginRequiredDialog(AppCompatActivity activity) {
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(activity, R.style.CustomMaterialAlertDialog);
+        builder.setTitle("Yêu cầu đăng nhập");
+        builder.setMessage("Bạn cần đăng nhập để làm bài kiểm tra!");
+        builder.setPositiveButton("Đăng nhập", (dialog, which) -> {
+            // Điều hướng đến màn hình đăng nhập
+            Navigation.navigateToActivity(activity, LoginActivity.class);
+        });
+        builder.setNegativeButton("Hủy", null);
+        builder.setCancelable(true);
+        builder.show();
     }
 }

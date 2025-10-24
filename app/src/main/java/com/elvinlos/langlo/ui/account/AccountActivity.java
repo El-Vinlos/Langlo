@@ -53,7 +53,7 @@ public class AccountActivity extends AppCompatActivity {
         credentialManager = CredentialManager.create(this);
 
         MaterialToolbar toolbar = findViewById(R.id.topAppBar);
-        toolbar.setNavigationOnClickListener(v -> finish());
+        toolbar.setNavigationOnClickListener(v -> Navigation.navigateToActivity(this, MainActivity.class));
 
         // Initialize UI elements
         nameTextView = findViewById(R.id.nameTextView);
