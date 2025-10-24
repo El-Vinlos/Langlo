@@ -43,6 +43,9 @@
         <activity android:name=".ui.exam.ExamActivity"
             android:exported="false"/>
 
+        <activity android:name=".ui.exam.ExamSelectorActivity"
+            android:exported="false"/>
+
         <activity
             android:name=".ui.speech.PronunciationTestActivity"
             android:exported="false"

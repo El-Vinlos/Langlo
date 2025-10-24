@@ -2,6 +2,7 @@ package com.elvinlos.langlo.ui.exam;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -9,7 +10,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.elvinlos.langlo.Question;
@@ -19,19 +19,15 @@ import com.elvinlos.langlo.ui.main.MainActivity;
 import com.elvinlos.langlo.utils.Navigation;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.color.MaterialColors;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -39,6 +35,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ExamActivity extends AppCompatActivity {
+
+    private static final String TAG = "ExamActivity";
 
     private MaterialToolbar toolbar;
     private TextView questionNumberTextView;
@@ -61,8 +59,10 @@ public class ExamActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
+    private DatabaseReference examsRef;
     private String userId;
-    private String quizId;
+    private String examId; // "exam_vocabulary", "exam_grammar", "exam_idioms"
+    private String examType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,12 +72,26 @@ public class ExamActivity extends AppCompatActivity {
         // Initialize Firebase
         mAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        examsRef = FirebaseDatabase.getInstance().getReference("exams");
 
-        IsLogin();
+        // Get current user
+        if (mAuth.getCurrentUser() != null) {
+            userId = mAuth.getCurrentUser().getUid();
+        } else {
+            Toast.makeText(this, "Bạn cần đăng nhập!", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
 
-        // Get quiz ID from intent
+        // Get exam info from intent
         Intent intent = getIntent();
-        quizId = intent.getStringExtra("quiz_id");
+        examId = intent.getStringExtra("exam_id");
+        examType = intent.getStringExtra("exam_type");
+
+        // Fallback nếu không có examId
+        if (examId == null) {
+            examId = "exam_vocabulary"; // Default
+        }
 
         // Initialize views
         initViews();
@@ -85,27 +99,14 @@ public class ExamActivity extends AppCompatActivity {
         // Initialize user answers map
         userAnswers = new HashMap<>();
 
-        // Load questions from JSON
-        loadQuestionsFromJson();
-
-        // Display first question
-        displayQuestion();
+        // Load questions from Firebase
+        loadQuestionsFromFirebase();
 
         // Setup listeners
         setupListeners();
 
         // Setup toolbar back button
         toolbar.setNavigationOnClickListener(v -> showExitDialog());
-    }
-
-    public boolean IsLogin() {
-        if (mAuth.getCurrentUser() != null) {
-            userId = mAuth.getCurrentUser().getUid();
-            return true;
-        } else {
-            Toast.makeText(this, "Vui lòng đăng nhập!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
     }
 
     private void initViews() {
@@ -150,8 +151,65 @@ public class ExamActivity extends AppCompatActivity {
         });
     }
 
+    private void loadQuestionsFromFirebase() {
+        Log.d(TAG, "Loading questions for: " + examId);
+
+        // Show loading
+        progressBar.setVisibility(View.VISIBLE);
+        nextButton.setEnabled(false);
+
+        // Path: exams/exam_vocabulary/questions
+        examsRef.child(examId).child("questions")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            questionList = new ArrayList<>();
+
+                            for (DataSnapshot questionSnapshot : dataSnapshot.getChildren()) {
+                                Question question = questionSnapshot.getValue(Question.class);
+                                if (question != null) {
+                                    questionList.add(question);
+                                }
+                            }
+
+                            if (!questionList.isEmpty()) {
+                                Log.d(TAG, "✅ Loaded " + questionList.size() + " questions");
+
+                                // Shuffle và giới hạn số câu hỏi
+                                Collections.shuffle(questionList);
+                                if (questionList.size() > TOTAL_QUESTIONS) {
+                                    questionList = questionList.subList(0, TOTAL_QUESTIONS);
+                                }
+
+                                progressBar.setVisibility(View.GONE);
+                                displayQuestion();
+
+                                Toast.makeText(ExamActivity.this,
+                                        "Đã tải " + questionList.size() + " câu hỏi",
+                                        Toast.LENGTH_SHORT).show();
+                            } else {
+                                showError("Không có câu hỏi nào");
+                            }
+                        } else {
+                            showError("Exam không tồn tại: " + examId);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        Log.e(TAG, "Failed to load questions", error.toException());
+                        progressBar.setVisibility(View.GONE);
+                        showError("Lỗi kết nối: " + error.getMessage());
+                    }
+                });
+    }
+
     private void displayQuestion() {
-        if (questionList == null || questionList.isEmpty()) return;
+        if (questionList == null || questionList.isEmpty()) {
+            showError("Không có câu hỏi để hiển thị");
+            return;
+        }
 
         Question question = questionList.get(currentQuestionIndex);
 
@@ -192,46 +250,11 @@ public class ExamActivity extends AppCompatActivity {
         } else {
             nextButton.setText("Câu tiếp theo");
         }
-    }
 
-    private void loadQuestionsFromJson() {
-        try {
-            InputStream is = getAssets().open("questions.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            String json = new String(buffer, "UTF-8");
-
-            JSONObject jsonObject = new JSONObject(json);
-            JSONArray questionsArray = jsonObject.getJSONArray("questions");
-
-            questionList = new ArrayList<>();
-
-            for (int i = 0; i < questionsArray.length(); i++) {
-                JSONObject questionObj = questionsArray.getJSONObject(i);
-
-                Question question = new Question(
-                        questionObj.getString("questionId"),
-                        questionObj.getString("question"),
-                        questionObj.getString("optionA"),
-                        questionObj.getString("optionB"),
-                        questionObj.getString("optionC"),
-                        questionObj.getString("optionD"),
-                        questionObj.getString("correctAnswer")
-                );
-
-                questionList.add(question);
-            }
-
-            Collections.shuffle(questionList);
-            questionList = questionList.subList(0, Math.min(TOTAL_QUESTIONS, questionList.size()));
-
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Lỗi khi tải câu hỏi!", Toast.LENGTH_SHORT).show();
-            finish();
-        }
+        // Log for debugging
+        Log.d(TAG, "Displaying Question " + (currentQuestionIndex + 1));
+        Log.d(TAG, "Question: " + question.getQuestion());
+        Log.d(TAG, "Correct Answer: " + question.getCorrectAnswer());
     }
 
     private void submitExam() {
@@ -252,6 +275,8 @@ public class ExamActivity extends AppCompatActivity {
             }
         }
 
+        Log.d(TAG, "Final Score: " + score + "/" + (questionList.size() * POINTS_PER_QUESTION));
+
         finishExam();
     }
 
@@ -265,22 +290,25 @@ public class ExamActivity extends AppCompatActivity {
                 int newTotalScore = user.getTotalScore() + score;
                 int newGamesPlayed = user.getGamesPlayed() + 1;
 
+                // Update user stats
                 databaseReference.child("users").child(userId).child("totalScore").setValue(newTotalScore);
                 databaseReference.child("users").child(userId).child("gamesPlayed").setValue(newGamesPlayed);
 
-                if (quizId != null) {
+                // Update exam-specific high score
+                if (examId != null) {
                     databaseReference.child("users").child(userId)
-                            .child("quizScores").child(quizId)
-                            .get().addOnSuccessListener(quizScoreSnapshot -> {
-                                Long currentHighScore = quizScoreSnapshot.getValue(Long.class);
+                            .child("examScores").child(examId)
+                            .get().addOnSuccessListener(examScoreSnapshot -> {
+                                Long currentHighScore = examScoreSnapshot.getValue(Long.class);
                                 if (currentHighScore == null || score > currentHighScore) {
                                     databaseReference.child("users").child(userId)
-                                            .child("quizScores").child(quizId).setValue((long) score);
+                                            .child("examScores").child(examId).setValue((long) score);
                                 }
                             });
                 }
 
-                databaseReference.child("leaderboard").child(userId).child("username").setValue(user.getName());
+                // Update leaderboard
+                databaseReference.child("leaderboard").child(userId).child("name").setValue(user.getName());
                 databaseReference.child("leaderboard").child(userId).child("totalScore").setValue(newTotalScore);
                 databaseReference.child("leaderboard").child(userId).child("gamesPlayed").setValue(newGamesPlayed);
 
@@ -291,6 +319,7 @@ public class ExamActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
             nextButton.setEnabled(true);
             Toast.makeText(this, "Lỗi khi lưu điểm!", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "Error saving score", e);
         });
     }
 
@@ -308,7 +337,8 @@ public class ExamActivity extends AppCompatActivity {
         });
         builder.setNegativeButton("Làm lại", (dialog, which) -> {
             Intent intent = new Intent(ExamActivity.this, ExamActivity.class);
-            intent.putExtra("quiz_id", quizId);
+            intent.putExtra("exam_id", examId);
+            intent.putExtra("exam_type", examType);
             startActivity(intent);
             finish();
         });
@@ -323,6 +353,23 @@ public class ExamActivity extends AppCompatActivity {
         builder.setPositiveButton("Thoát", (dialog, which) -> Navigation.navigateToActivity(this, MainActivity.class));
         builder.setNegativeButton("Tiếp tục", null);
         builder.show();
+    }
+
+    private void showError(String message) {
+        Log.e(TAG, message);
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        progressBar.setVisibility(View.GONE);
+
+        // Hiển thị dialog lỗi và quay về MainActivity
+        new MaterialAlertDialogBuilder(this, R.style.CustomMaterialAlertDialog)
+                .setTitle("Lỗi")
+                .setMessage(message)
+                .setPositiveButton("OK", (dialog, which) -> {
+                    Navigation.navigateToActivity(this, MainActivity.class);
+                    finish();
+                })
+                .setCancelable(false)
+                .show();
     }
 
 //    @Override
