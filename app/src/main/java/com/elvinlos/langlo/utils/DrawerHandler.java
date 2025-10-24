@@ -12,6 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.elvinlos.langlo.ui.account.LoginActivity;
 import com.elvinlos.langlo.ui.deck.DeckActivity;
 import com.elvinlos.langlo.ui.exam.ExamActivity;
+import com.elvinlos.langlo.ui.exam.ExamSelectorActivity;
 import com.elvinlos.langlo.ui.main.MainActivity;
 import com.elvinlos.langlo.R;
 import com.elvinlos.langlo.ui.speech.SpeakActivity;
@@ -55,7 +56,7 @@ public class DrawerHandler {
             if (!isUserLoggedIn(activity)) {
                 showLoginRequiredDialog(activity);
             } else if (!(activity instanceof ExamActivity)) {
-                activity.startActivity(new Intent(activity, ExamActivity.class));
+                activity.startActivity(new Intent(activity, ExamSelectorActivity.class));
                 activity.finish();
                 topAppBar.getMenu().clear();
                 topAppBar.inflateMenu(R.menu.top_app_bar_deck);
