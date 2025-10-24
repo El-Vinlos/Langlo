@@ -60,4 +60,5 @@
     <string name="result_txt_pronounce">Result will appear here</string>
     <string name="retry_button_txt">retry</string>
     <string name="best_score_format">Best Score: %1$d%%  (Attempts: %2$d)</string>
+    <string name="recycle_view_deck_cards">" thẻ"</string>
 </resources>
