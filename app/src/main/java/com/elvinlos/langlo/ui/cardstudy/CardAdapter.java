@@ -1,5 +1,8 @@
 package com.elvinlos.langlo.ui.cardstudy;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +48,18 @@ public class CardAdapter extends ListAdapter<Card, CardAdapter.CardViewHolder> {
         Card card = getItem(position);
         holder.textEnglish.setText(card.getEnglish());
         holder.textVietnamese.setText(card.getVietnamese());
+
+        holder.itemView.setOnLongClickListener(v -> {
+            Context context = v.getContext();
+            ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            String textToCopy = card.getEnglish() + " - " + card.getVietnamese();
+            ClipData clip = ClipData.newPlainText("card_content", textToCopy);
+            if (clipboard != null) {
+                clipboard.setPrimaryClip(clip);
+            }
+            return true;
+        });
+
     }
 
     public static class CardViewHolder extends RecyclerView.ViewHolder {
