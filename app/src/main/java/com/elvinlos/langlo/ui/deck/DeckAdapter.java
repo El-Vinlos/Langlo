@@ -39,7 +39,7 @@ public class DeckAdapter extends RecyclerView.Adapter<DeckAdapter.DeckViewHolder
         Deck deck = deckList.get(position);
         holder.title.setText(deck.getTitle());
         holder.description.setText(deck.getDescription());
-        holder.cardCount.setText(deck.getCardCount() + " cards");
+        holder.cardCount.setText(deck.getCardCount() + context.getString(R.string.recycle_view_deck_cards));
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, CardStudyActivity.class);
