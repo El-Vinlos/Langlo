@@ -82,6 +82,34 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/nameTextView" />
 
+                <!-- Level Badge -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/levelBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:cardBackgroundColor="?attr/colorPrimary"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/emailTextView">
+
+                    <TextView
+                        android:id="@+id/levelTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="6dp"
+                        android:text="Cấp 1"
+                        android:textColor="?attr/colorOnPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Total Score -->
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
@@ -193,11 +221,12 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="32dp"
             android:paddingVertical="16dp"
-            android:text="Sign Out"
+            android:text="Đăng Xuất"
             android:textSize="16sp"
             app:cornerRadius="12dp"
-            app:icon="@android:drawable/ic_menu_close_clear_cancel"
             app:iconGravity="textStart"
+            android:backgroundTint="@color/colorButtonBackground"
+            android:textColor="@color/colorOnButtonBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

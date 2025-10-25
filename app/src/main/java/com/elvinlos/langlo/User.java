@@ -18,6 +18,10 @@ public class User {
         this.gamesPlayed = 0;
     }
 
+    public int getLevel() {
+        return LevelSystem.calculateLevel(totalScore);
+    }
+
     public User(String userId, String name, String email) {
         this.userId = userId;
         this.name = name;  // Gán vào name

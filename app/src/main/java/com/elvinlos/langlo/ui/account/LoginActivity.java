@@ -129,7 +129,6 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d(TAG, "✅ Player saved successfully!");
                         Log.d(TAG, "Username: " + finalName);
                         Log.d(TAG, "Path: players/" + uid);
-                        Toast.makeText(this, "Đã lưu: " + finalName, Toast.LENGTH_SHORT).show();
 
                         if (onComplete != null) {
                             onComplete.run();

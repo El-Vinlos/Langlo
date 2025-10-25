@@ -108,7 +108,6 @@ public class FirebaseHelper {
                         FirebaseUser user = auth.getCurrentUser();
                         Log.d(TAG, "signInWithCredential:success");
                         assert user != null;
-                        Toast.makeText(activity, "Welcome, " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
                         listener.onSignInSuccess();
                     } else {
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
