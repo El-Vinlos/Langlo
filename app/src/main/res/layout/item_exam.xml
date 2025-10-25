@@ -15,7 +15,7 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/textDeckTitle"
+            android:id="@+id/textExamTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tên bài trắc nghiệm"
@@ -24,7 +24,7 @@
             android:textSize="18sp"/>
 
         <TextView
-            android:id="@+id/textDeckDescription"
+            android:id="@+id/textExamQuestionAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Câu hỏi: 0"

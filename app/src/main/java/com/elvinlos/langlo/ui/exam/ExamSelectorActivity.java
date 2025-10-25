@@ -1,6 +1,5 @@
 package com.elvinlos.langlo.ui.exam;
 
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -13,51 +12,51 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.elvinlos.langlo.Deck;
-import com.elvinlos.langlo.Question;
+import com.elvinlos.langlo.Exam;
 import com.elvinlos.langlo.R;
-import com.elvinlos.langlo.ui.deck.DeckAdapter;
 import com.elvinlos.langlo.utils.DrawerHandler;
 import com.elvinlos.langlo.utils.Logger;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExamSelectorActivity extends AppCompatActivity {
     private static final String TAG = "EXAM_SELECTOR";
-    private final List<Question> questionList = new ArrayList<>();
 
-    FirebaseUser user;
-    private DatabaseReference dbRef;
+    private final List<Exam> examList = new ArrayList<>();
+    private DatabaseReference examsRef;
+    private ExamAdapter examAdapter; // ✅ Khai báo ở đây
     private DrawerLayout drawerLayout;
     private MaterialToolbar topAppBar;
     private ActionBarDrawerToggle toggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam_selector);
 
+        // Initialize views
         drawerLayout = findViewById(R.id.drawerLayout);
         NavigationView navigationView = findViewById(R.id.navigationView);
         topAppBar = findViewById(R.id.topAppBar);
 
         setSupportActionBar(topAppBar);
-        topAppBar.setTitle(getString(R.string.app_name));
+        topAppBar.setTitle("Trắc nghiệm");
 
+        // Initialize Firebase
+        FirebaseDatabase db = FirebaseDatabase.getInstance(
+                "https://langlo-7c380-default-rtdb.asia-southeast1.firebasedatabase.app"
+        );
+        examsRef = db.getReference("exams");
 
+        // Setup Drawer
         toggle = new ActionBarDrawerToggle(
                 this,
                 drawerLayout,
@@ -76,16 +75,15 @@ public class ExamSelectorActivity extends AppCompatActivity {
             return true;
         });
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewDecks);
+        // Setup RecyclerView
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewExams);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-//        DeckAdapter deckAdapter = new DeckAdapter(this, questionList);
-//        recyclerView.setAdapter(deckAdapter);
+        // ✅ Khởi tạo adapter trước
+        examAdapter = new ExamAdapter(this, examList);
+        recyclerView.setAdapter(examAdapter);
 
-        FirebaseDatabase db = FirebaseDatabase.getInstance(
-                "https://langlo-7c380-default-rtdb.asia-southeast1.firebasedatabase.app"
-        );
-
+        // Setup back press
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -99,29 +97,78 @@ public class ExamSelectorActivity extends AppCompatActivity {
             }
         });
 
-        loadExams();
+        // Load data
+        loadExamsFromFirebase();
     }
 
-    private void loadExams() {
-        dbRef.child("questions").addListenerForSingleValueEvent(new ValueEventListener() {
+    private void loadExamsFromFirebase() {
+        Logger.d(TAG, "Loading exams from Firebase...");
+
+        examsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                questionList.clear();
-                for (DataSnapshot quizSnap : snapshot.getChildren()) {
-                    Question question = quizSnap.getValue(Question.class);
-                    if (question != null) {
-                        question.setQuestionId(quizSnap.getKey());
-                        questionList.add(question);
+                examList.clear();
+
+                if (snapshot.exists()) {
+                    Logger.d(TAG, "Found exams node, processing...");
+
+                    for (DataSnapshot examSnapshot : snapshot.getChildren()) {
+                        String examId = examSnapshot.getKey();
+                        Logger.d(TAG, "Processing exam: " + examId);
+
+                        // Đếm số câu hỏi
+                        DataSnapshot questionsSnapshot = examSnapshot.child("questions");
+                        int questionCount = (int) questionsSnapshot.getChildrenCount();
+
+                        // Lấy title
+                        String title = examSnapshot.child("title").getValue(String.class);
+                        if (title == null || title.isEmpty()) {
+                            title = formatExamTitle(examId);
+                        }
+
+                        // Tạo Exam object
+                        Exam exam = new Exam(title, questionCount + " câu hỏi");
+                        examList.add(exam);
+
+                        Logger.d(TAG, "✅ Added exam: " + title + " (" + questionCount + " questions)");
                     }
+
+                    // ✅ Cập nhật adapter
+                    examAdapter.notifyDataSetChanged();
+                    Logger.d(TAG, "Total exams loaded: " + examList.size());
+                } else {
+                    Logger.w(TAG, "No exams found in database at path: exams/");
+                    Toast.makeText(ExamSelectorActivity.this,
+                            "Chưa có đề thi nào",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Logger.e(TAG, "Failed to load exams: " + error.getMessage());
                 Toast.makeText(ExamSelectorActivity.this,
-                        "Failed to load exams: " + error.getMessage(),
+                        "Lỗi: " + error.getMessage(),
                         Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private String formatExamTitle(String examId) {
+        if (examId == null || examId.isEmpty()) return "Unknown";
+
+        String title = examId.replace("exam_", "").replace("_", " ");
+        if (title.length() > 0) {
+            title = title.substring(0, 1).toUpperCase() + title.substring(1);
+        }
+        return title;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        if (toggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
