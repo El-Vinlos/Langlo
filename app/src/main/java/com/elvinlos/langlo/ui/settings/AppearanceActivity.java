@@ -30,7 +30,6 @@ public class AppearanceActivity extends AppCompatActivity {
         RadioButton lightThemeRadio = findViewById(R.id.light_theme_radio);
         RadioButton darkThemeRadio = findViewById(R.id.dark_theme_radio);
 
-        // Load saved theme preference
         String savedTheme = prefs.getString("theme", "light");
         if (savedTheme.equals("dark")) {
             darkThemeRadio.setChecked(true);
@@ -43,6 +42,8 @@ public class AppearanceActivity extends AppCompatActivity {
                 applyTheme("light");
             } else if (checkedId == R.id.dark_theme_radio) {
                 applyTheme("dark");
+            } else if (checkedId == R.id.system_theme_radio) {
+                applyTheme("system");
             }
         });
     }
@@ -52,10 +53,17 @@ public class AppearanceActivity extends AppCompatActivity {
         editor.putString("theme", theme);
         editor.apply();
 
-        if (theme.equals("dark")) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        switch (theme) {
+            case "dark":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                break;
+            case "light":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                break;
+            case "system":
+            default:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                break;
         }
     }
 

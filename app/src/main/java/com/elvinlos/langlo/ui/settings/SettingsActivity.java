@@ -21,12 +21,9 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         LinearLayout appearanceItem = findViewById(R.id.appearance_item);
-        appearanceItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, AppearanceActivity.class);
-                startActivity(intent);
-            }
+        appearanceItem.setOnClickListener(v -> {
+            Intent intent = new Intent(SettingsActivity.this, AppearanceActivity.class);
+            startActivity(intent);
         });
     }
 
