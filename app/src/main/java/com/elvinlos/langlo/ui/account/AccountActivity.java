@@ -2,6 +2,7 @@ package com.elvinlos.langlo.ui.account;
 
 import android.os.Bundle;
 import android.os.CancellationSignal;
+import android.provider.Settings;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import androidx.credentials.exceptions.ClearCredentialException;
 import com.bumptech.glide.Glide;
 import com.elvinlos.langlo.R;
 import com.elvinlos.langlo.ui.main.MainActivity;
+import com.elvinlos.langlo.ui.settings.SettingsActivity;
 import com.elvinlos.langlo.utils.Navigation;
 import com.elvinlos.langlo.LevelSystem;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -78,7 +80,7 @@ public class AccountActivity extends AppCompatActivity {
         });
 
         settingsCard.setOnClickListener(v -> {
-            // TODO: Navigate to settings activity
+            Navigation.navigateToActivityWithBackStack(this, SettingsActivity.class);
             Log.d(TAG, "Settings clicked");
         });
     }

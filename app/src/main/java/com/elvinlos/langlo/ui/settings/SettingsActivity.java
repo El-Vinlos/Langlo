@@ -4,6 +4,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.elvinlos.langlo.R;
+import com.elvinlos.langlo.ui.account.AccountActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 
 import android.content.Intent;
@@ -27,6 +28,12 @@ public class SettingsActivity extends AppCompatActivity {
         LinearLayout appearanceItem = findViewById(R.id.appearance_item);
         appearanceItem.setOnClickListener(v -> {
             Intent intent = new Intent(SettingsActivity.this, AppearanceActivity.class);
+            startActivity(intent);
+        });
+
+        LinearLayout userItem = findViewById(R.id.userItem);
+        userItem.setOnClickListener(v -> {
+            Intent intent = new Intent(SettingsActivity.this, AccountActivity.class);
             startActivity(intent);
         });
     }
