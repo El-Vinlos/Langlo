@@ -52,10 +52,19 @@ public class DrawerHandler {
                 topAppBar.getMenu().clear();
                 topAppBar.inflateMenu(R.menu.top_app_bar_deck);
             }
-        } else if (id == R.id.nav_exam) {
-            if (!isUserLoggedIn(activity)) {
-                showLoginRequiredDialog(activity);
-            } else if (!(activity instanceof ExamActivity)) {
+        }
+//        else if (id == R.id.nav_exam) {
+//            if (!isUserLoggedIn(activity)) {
+//                showLoginRequiredDialog(activity);
+//            } else if (!(activity instanceof ExamActivity)) {
+//                activity.startActivity(new Intent(activity, ExamSelectorActivity.class));
+//                activity.finish();
+//                topAppBar.getMenu().clear();
+//                topAppBar.inflateMenu(R.menu.top_app_bar_deck);
+//            }
+//        }
+        else if (id == R.id.nav_exam) {
+            if (!(activity instanceof ExamSelectorActivity)) {
                 activity.startActivity(new Intent(activity, ExamSelectorActivity.class));
                 activity.finish();
                 topAppBar.getMenu().clear();
