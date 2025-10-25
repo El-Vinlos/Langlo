@@ -15,6 +15,7 @@ import com.elvinlos.langlo.ui.exam.ExamActivity;
 import com.elvinlos.langlo.ui.exam.ExamSelectorActivity;
 import com.elvinlos.langlo.ui.main.MainActivity;
 import com.elvinlos.langlo.R;
+import com.elvinlos.langlo.ui.settings.SettingsActivity;
 import com.elvinlos.langlo.ui.speech.SpeakActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -70,8 +71,13 @@ public class DrawerHandler {
                 topAppBar.getMenu().clear();
                 topAppBar.inflateMenu(R.menu.top_app_bar_deck);
             }
-        } else if (id == R.id.nav_setting) {
-            //TODO : ADD SETTING
+        } else if (id == R.id.nav_settings) {
+            if (!(activity instanceof SettingsActivity)) {
+                activity.startActivity(new Intent(activity, SettingsActivity.class));
+                activity.finish();
+                topAppBar.getMenu().clear();
+                topAppBar.inflateMenu(R.menu.top_app_bar_deck);
+            }
         } else if (id == R.id.nav_speak) {
             if (!(activity instanceof SpeakActivity)) {
                 activity.startActivity(new Intent(activity, SpeakActivity.class));

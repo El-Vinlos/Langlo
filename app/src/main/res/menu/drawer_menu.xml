@@ -5,6 +5,6 @@
         <item android:id="@+id/nav_card" android:title="@string/card_menu" android:icon="@drawable/card" />
         <item android:id="@+id/nav_exam" android:title="@string/exam_menu" android:icon="@drawable/exam" />
         <item android:id="@+id/nav_speak" android:title="@string/speak_menu" android:icon="@drawable/headphones" />
-        <item android:id="@+id/nav_setting" android:title="@string/setting_menu" android:icon="@drawable/setting" />
+        <item android:id="@+id/nav_settings" android:title="@string/setting_menu" android:icon="@drawable/setting" />
     </group>
 </menu>
