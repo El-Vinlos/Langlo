@@ -7,4 +7,6 @@
     <color name="colorOnBackground">#000000</color>
     <color name="colorSurface">#FFFFFF</color>
     <color name="colorOnSurface">#000000</color>
+    <color name="colorButtonBackground">#FF0000</color>
+    <color name="colorOnButtonBackground">#FFFFFF</color>
 </resources>

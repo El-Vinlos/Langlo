@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.elvinlos.langlo.R;
 import com.elvinlos.langlo.ui.main.MainActivity;
 import com.elvinlos.langlo.utils.Navigation;
+import com.elvinlos.langlo.LevelSystem;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
@@ -38,6 +39,7 @@ public class AccountActivity extends AppCompatActivity {
     private MaterialButton signOutButton;
     private MaterialCardView editProfileCard;
     private MaterialCardView settingsCard;
+    private TextView levelTextView;
 
     // Firebase components
     private FirebaseAuth mAuth;
@@ -58,6 +60,7 @@ public class AccountActivity extends AppCompatActivity {
         // Initialize UI elements
         nameTextView = findViewById(R.id.nameTextView);
         emailTextView = findViewById(R.id.emailTextView);
+        levelTextView = findViewById(R.id.levelTextView);
         avatarImageView = findViewById(R.id.avatarImageView);
         signOutButton = findViewById(R.id.signOutButton);
         editProfileCard = findViewById(R.id.editProfileCard);
@@ -98,28 +101,47 @@ public class AccountActivity extends AppCompatActivity {
             if (currentUser.getPhotoUrl() != null) {
                 Glide.with(this)
                         .load(currentUser.getPhotoUrl())
-                        .placeholder(R.drawable.ic_launcher_foreground) // Default placeholder
+                        .placeholder(R.drawable.ic_launcher_foreground)
                         .circleCrop()
                         .into(avatarImageView);
             }
 
-            // Get display name from Firebase Realtime Database
+            // Get user data from Firebase Realtime Database
             FirebaseDatabase db = FirebaseDatabase.getInstance(
                     "https://langlo-7c380-default-rtdb.asia-southeast1.firebasedatabase.app/"
             );
 
-            db.getReference("users").child(uid).child("name").get()
+            // LẤY TOÀN BỘ USER DATA MỘT LẦN
+            db.getReference("users").child(uid).get()
                     .addOnSuccessListener(snapshot -> {
                         if (snapshot.exists()) {
-                            String userName = snapshot.getValue(String.class);
-                            nameTextView.setText(userName);
+                            // Get username
+                            String name = snapshot.child("name").getValue(String.class);
+                            nameTextView.setText(name != null ? name : "Welcome!");
+
+                            // Get totalScore and calculate level
+                            Integer totalScore = snapshot.child("totalScore").getValue(Integer.class);
+
+                            Log.d(TAG, "Total Score from Firebase: " + totalScore);
+
+                            if (totalScore != null && totalScore > 0) {
+                                int level = LevelSystem.calculateLevel(totalScore);
+                                Log.d(TAG, "Calculated Level: " + level);
+                                levelTextView.setText("Cấp " + level);
+                            } else {
+                                Log.d(TAG, "No totalScore found, setting Level 1");
+                                levelTextView.setText("Cấp 1");
+                            }
                         } else {
+                            Log.d(TAG, "User data does not exist");
                             nameTextView.setText("Welcome!");
+                            levelTextView.setText("Cấp 1");
                         }
                     })
                     .addOnFailureListener(e -> {
-                        Log.e(TAG, "Failed to get user name", e);
+                        Log.e(TAG, "Failed to get user data", e);
                         nameTextView.setText("Welcome!");
+                        levelTextView.setText("Cấp 1");
                     });
         } else {
             // No user logged in, navigate to login
