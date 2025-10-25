@@ -61,4 +61,11 @@
     <string name="retry_button_txt">retry</string>
     <string name="best_score_format">Best Score: %1$d%%  (Attempts: %2$d)</string>
     <string name="recycle_view_deck_cards">" thẻ"</string>
+    <string name="appearance_note">Lưu ý</string>
+    <string name="appearance_note_content">Chủ để sẽ được thay đổi tức thì và sẽ được lưu lại cho lần sau mở ứng dụng</string>
+    <string name="choose_theme">chọn chủ đề bạn muốn sử dụng</string>
+    <string name="light_theme">Chủ đề sáng</string>
+    <string name="dark_theme">chủ đề tối</string>
+    <string name="Appearance">Giao diện</string>
+    <string name="system_preference">Theo hệ thống</string>
 </resources>

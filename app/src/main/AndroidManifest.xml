@@ -26,6 +26,8 @@
             android:label="Decks"
             android:exported="false" />
 
+        <activity android:name=".ui.settings.SettingsActivity" />
+        <activity android:name=".ui.settings.AppearanceActivity" />
 
         <activity
             android:name=".ui.cardstudy.CardStudyActivity"
