@@ -91,10 +91,9 @@
                 android:layout_marginStart="56dp"
                 android:background="?android:attr/listDivider" />
 
-            <!-- You can add more settings items here -->
 
-            <!-- Account Section (Example) -->
             <LinearLayout
+                android:id="@+id/userItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/selectableItemBackground"
