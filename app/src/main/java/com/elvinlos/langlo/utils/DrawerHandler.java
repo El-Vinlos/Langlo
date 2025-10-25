@@ -74,9 +74,7 @@ public class DrawerHandler {
         } else if (id == R.id.nav_settings) {
             if (!(activity instanceof SettingsActivity)) {
                 activity.startActivity(new Intent(activity, SettingsActivity.class));
-                activity.finish();
                 topAppBar.getMenu().clear();
-                topAppBar.inflateMenu(R.menu.top_app_bar_deck);
             }
         } else if (id == R.id.nav_speak) {
             if (!(activity instanceof SpeakActivity)) {
