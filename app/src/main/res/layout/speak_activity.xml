@@ -28,7 +28,6 @@
                 app:titleCentered="true"
                 app:navigationIcon="@drawable/list"
                 app:navigationIconTint="?attr/colorOnPrimary"
-                app:menu="@menu/top_app_bar_home"
                 app:contentInsetStart="16dp"
                 app:contentInsetEnd="16dp" />
         </com.google.android.material.appbar.AppBarLayout>
