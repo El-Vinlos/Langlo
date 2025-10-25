@@ -8,16 +8,19 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="@string/settings"
+            app:titleCentered="true"
+            app:titleTextColor="?attr/colorOnPrimary"
             app:navigationIcon="@drawable/back"
-            app:title="Settings"
-            app:titleCentered="true" />
-
+            app:navigationIconTint="?attr/colorOnPrimary" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
@@ -57,7 +60,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Appearance"
+                        android:text="@string/appearance"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -66,7 +69,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="Customize app theme"
+                        android:text="@string/customize_app_theme"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="14sp" />
 
@@ -117,7 +120,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Account"
+                        android:text="@string/account"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -126,7 +129,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="Manage your account"
+                        android:text="@string/manage_your_account"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="14sp" />
 
@@ -175,7 +178,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Notifications"
+                        android:text="@string/notifications"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -184,7 +187,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="Manage notifications"
+                        android:text="@string/manage_notifications"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="14sp" />
 
@@ -242,7 +245,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="App version and info"
+                        android:text="@string/app_version_and_info"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="14sp" />
 
