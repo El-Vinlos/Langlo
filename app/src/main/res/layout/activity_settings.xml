@@ -48,8 +48,8 @@
                     android:layout_height="24dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="16dp"
-                    android:contentDescription="Appearance icon"
-                    android:src="@android:drawable/ic_menu_preferences" />
+                    android:src="@drawable/ic_palette"
+                    app:tint="@color/colorOnPrimary" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -108,8 +108,8 @@
                     android:layout_height="24dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="16dp"
-                    android:contentDescription="Account icon"
-                    android:src="@android:drawable/ic_menu_manage" />
+                    android:src="@drawable/user"
+                    app:tint="@color/colorOnPrimary" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -166,8 +166,8 @@
                     android:layout_height="24dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="16dp"
-                    android:contentDescription="Notifications icon"
-                    android:src="@android:drawable/ic_popup_reminder" />
+                    android:src="@drawable/ic_bell"
+                    app:tint="@color/colorOnPrimary" />
 
                 <LinearLayout
                     android:layout_width="0dp"
