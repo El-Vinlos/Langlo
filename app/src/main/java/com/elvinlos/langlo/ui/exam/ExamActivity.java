@@ -207,6 +207,8 @@ public class ExamActivity extends AppCompatActivity {
             return;
         }
 
+        scoreText.setText("Điểm: " + calculateScore());
+
         Question question = questionList.get(currentQuestionIndex);
 
         // Update question number and progress
@@ -259,8 +261,14 @@ public class ExamActivity extends AppCompatActivity {
             Toast.makeText(this, "Vui lòng trả lời tất cả các câu hỏi!", Toast.LENGTH_SHORT).show();
             return;
         }
+        calculateScore();
 
-        // Calculate score
+        Log.d(TAG, "Final Score: " + score + "/" + (questionList.size() * POINTS_PER_QUESTION));
+
+        finishExam();
+    }
+
+    private int calculateScore() {
         score = 0;
         for (int i = 0; i < questionList.size(); i++) {
             Question question = questionList.get(i);
@@ -270,10 +278,7 @@ public class ExamActivity extends AppCompatActivity {
                 score += POINTS_PER_QUESTION;
             }
         }
-
-        Log.d(TAG, "Final Score: " + score + "/" + (questionList.size() * POINTS_PER_QUESTION));
-
-        finishExam();
+        return score;
     }
 
     private void finishExam() {
