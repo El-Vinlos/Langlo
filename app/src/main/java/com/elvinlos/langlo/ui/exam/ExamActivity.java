@@ -184,10 +184,6 @@ public class ExamActivity extends AppCompatActivity {
 
                                 progressBar.setVisibility(View.GONE);
                                 displayQuestion();
-
-                                Toast.makeText(ExamActivity.this,
-                                        "Đã tải " + questionList.size() + " câu hỏi",
-                                        Toast.LENGTH_SHORT).show();
                             } else {
                                 showError("Không có câu hỏi nào");
                             }
@@ -350,7 +346,7 @@ public class ExamActivity extends AppCompatActivity {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, R.style.CustomMaterialAlertDialog);
         builder.setTitle("Thoát bài kiểm tra?");
         builder.setMessage("Bạn có chắc muốn thoát? Điểm số sẽ không được lưu!");
-        builder.setPositiveButton("Thoát", (dialog, which) -> Navigation.navigateToActivity(this, MainActivity.class));
+        builder.setPositiveButton("Thoát", (dialog, which) -> Navigation.navigateToActivity(this, ExamSelectorActivity.class));
         builder.setNegativeButton("Tiếp tục", null);
         builder.show();
     }

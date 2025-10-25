@@ -1,92 +1,70 @@
 package com.elvinlos.langlo.ui.exam;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.elvinlos.langlo.Question;
+import com.elvinlos.langlo.Exam;
 import com.elvinlos.langlo.R;
 
 import java.util.List;
 
-public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.QuestionViewHolder> {
+public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ExamViewHolder> {
 
-    private final List<Question> questions;
-    private final OnAnswerSelectedListener listener;
+    private final List<Exam> examList;
+    private final Context context;
 
-    public interface OnAnswerSelectedListener {
-        void onAnswerSelected(int position, String answer);
-    }
-
-    public ExamAdapter(List<Question> questions, OnAnswerSelectedListener listener) {
-        this.questions = questions;
-        this.listener = listener;
+    public ExamAdapter(Context context, List<Exam> examList) {
+        this.examList = examList;
+        this.context = context;
     }
 
     @NonNull
     @Override
-    public QuestionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_question, parent, false);
-        return new QuestionViewHolder(view);
+    public ExamViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_exam, parent, false);
+        return new ExamViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull QuestionViewHolder holder, int position) {
-        Question question = questions.get(position);
+    public void onBindViewHolder(@NonNull ExamViewHolder holder, int position) {
+        Exam exam = examList.get(position);
+        holder.title.setText(exam.getTitle());
+        holder.questionAmount.setText(exam.getQuestionAmount());
 
-        holder.questionNumberTextView.setText("Câu " + (position + 1));
-        holder.questionTextView.setText(question.getQuestion());
-        holder.optionA.setText(question.getOptionA());
-        holder.optionB.setText(question.getOptionB());
-        holder.optionC.setText(question.getOptionC());
-        holder.optionD.setText(question.getOptionD());
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ExamActivity.class);
 
-        // Clear previous selection
-        holder.optionsRadioGroup.clearCheck();
-
-        // Set listener for answer selection
-        holder.optionsRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            String answer = "";
-            if (checkedId == R.id.optionA) {
-                answer = "A";
-            } else if (checkedId == R.id.optionB) {
-                answer = "B";
-            } else if (checkedId == R.id.optionC) {
-                answer = "C";
-            } else if (checkedId == R.id.optionD) {
-                answer = "D";
+            // ✅ Truyền examId (cần lưu trong Exam class)
+            // Tạm thời dùng title để convert ngược
+            String examId = exam.getTitle().toLowerCase().replace(" ", "_");
+            if (!examId.startsWith("exam_")) {
+                examId = "exam_" + examId;
             }
-            listener.onAnswerSelected(position, answer);
+
+            intent.putExtra("examId", examId);
+            context.startActivity(intent);
         });
     }
 
     @Override
     public int getItemCount() {
-        return questions.size();
+        return examList.size();
     }
 
-    static class QuestionViewHolder extends RecyclerView.ViewHolder {
-        TextView questionNumberTextView;
-        TextView questionTextView;
-        RadioGroup optionsRadioGroup;
-        RadioButton optionA, optionB, optionC, optionD;
+    static class ExamViewHolder extends RecyclerView.ViewHolder {
+        TextView title, questionAmount;
 
-        QuestionViewHolder(@NonNull View itemView) {
+        public ExamViewHolder(@NonNull View itemView) {
             super(itemView);
-            questionNumberTextView = itemView.findViewById(R.id.questionNumberTextView);
-            questionTextView = itemView.findViewById(R.id.questionTextView);
-            optionsRadioGroup = itemView.findViewById(R.id.optionsRadioGroup);
-            optionA = itemView.findViewById(R.id.optionA);
-            optionB = itemView.findViewById(R.id.optionB);
-            optionC = itemView.findViewById(R.id.optionC);
-            optionD = itemView.findViewById(R.id.optionD);
+            title = itemView.findViewById(R.id.textExamTitle);
+            questionAmount = itemView.findViewById(R.id.textExamQuestionAmount);
         }
     }
 }

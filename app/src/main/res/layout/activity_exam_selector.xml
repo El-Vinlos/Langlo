@@ -32,13 +32,13 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewDecks"
+            android:id="@+id/recyclerViewExams"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:padding="8dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:listitem="@layout/item_question" />
+            tools:listitem="@layout/item_exam" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
