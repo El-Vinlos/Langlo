@@ -25,20 +25,27 @@ public class AppearanceActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        prefs = getSharedPreferences("AppSettings", MODE_PRIVATE);
+        prefs = getSharedPreferences("langlo_prefs", MODE_PRIVATE);
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setOnClickListener(v -> finish());
 
         RadioGroup themeRadioGroup = findViewById(R.id.theme_radio_group);
         RadioButton lightThemeRadio = findViewById(R.id.light_theme_radio);
+        RadioButton systemThemeRadio = findViewById(R.id.system_theme_radio);
         RadioButton darkThemeRadio = findViewById(R.id.dark_theme_radio);
 
-        String savedTheme = prefs.getString("theme", "light");
-        if (savedTheme.equals("dark")) {
-            darkThemeRadio.setChecked(true);
-        } else {
-            lightThemeRadio.setChecked(true);
+        String savedTheme = prefs.getString("theme", "system");
+        switch (savedTheme) {
+            case "dark":
+                darkThemeRadio.setChecked(true);
+                break;
+            case "light":
+                lightThemeRadio.setChecked(true);
+                break;
+            default:
+                systemThemeRadio.setChecked(true);
+                break;
         }
 
         themeRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
