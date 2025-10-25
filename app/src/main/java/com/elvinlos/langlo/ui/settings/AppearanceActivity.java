@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.elvinlos.langlo.R;
+import com.google.android.material.appbar.MaterialToolbar;
 
 public class AppearanceActivity extends AppCompatActivity {
 
@@ -25,6 +26,9 @@ public class AppearanceActivity extends AppCompatActivity {
         }
 
         prefs = getSharedPreferences("AppSettings", MODE_PRIVATE);
+
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setOnClickListener(v -> finish());
 
         RadioGroup themeRadioGroup = findViewById(R.id.theme_radio_group);
         RadioButton lightThemeRadio = findViewById(R.id.light_theme_radio);
